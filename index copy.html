@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>MyToolkit</title>
+    <link rel="stylesheet" href="./assets/style.css">
+  </head>
+  <body class = "homeBody" onload="resize();">
+    <!-- Navbar at the top -->
+    <img src = "./assets/svg/logo_white.svg" id = "navbar0" onclick = "showSidebar();" width = "54.5" height = "54.5" class = "logo" style="top: 32px; left: 17px;">
+    <div class = "navbar" id = "navbar1" onclick = "showSidebar();" style = "top: 37px; left: 89px;">MYTOOLKIT</div>
+    <div class = "navbar" id = "navbar2" style = "top: 37px; left: 1038px;">ABOUT THE TOOLS</div>
+    <div class = "navbar" id = "navbar3" style = "top: 37px; left: 1360px;" onclick="window.location = './login.html';">LOGIN</div>
+    <!-- Navbar at the top -->
+
+    <!-- Sidebar -->
+    <img src = "./assets/svg/sidebar.svg" id = "sidebar0" width = "451.2" height = "864" class = "sidebar" style = "top:-0.5px; left:-451.2px"> <!-- small issue here, corner is not fully rounded-->
+    <div class = "sidebarClickables" id = "sidebar1" style = "top: 97px; left: 89px;opacity: 0;" onclick="window.location = 'myschedule.html'">MYSCHEDULE</div>
+    <div class = "sidebarClickables" id = "sidebar2" style = "top: 177px; left: 89px;opacity: 0;" onclick="window.location = './mygpa.html'">MYGPA</div>
+    <div class = "sidebarClickables" id = "sidebar3" style = "top: 257px; left: 89px;opacity: 0;" onclick="window.location = './myclubs.html'">MYCLUBS</div>
+    <div class = "sidebarClickables" id = "sidebar4" style = "top: 337px; left: 89px;opacity: 0;" onclick="window.location = './myday.html';">MYDAY</div>
+    <!-- Sidebar -->
+
+    <!-- Main text (name, description, and get started) -->
+    <div class = "mainText" id = "mainText0" style = "top: 211px; font-size: 98px;color: #141414;">MyToolkit</div>
+    <div class = "mainText" id = "mainText1" style = "top: 237px; font-size: 55.5px;color: #535454;">All the tools you'll ever need<span class = "br"></span>all in one place</div>
+    <div class = "mainText" id = "mainText2" style = "top: 306px; font-size: 37.5px;color: #141414;" onclick="window.location = './login.html';">Get Started<span class = "smallbr"></span>↓</div>
+    <!-- Main text (name, description, and get started) -->
+  </body>
+
+  <!-- why was the solution so easy ive been looking for this for literal years -->
+  <script> // DYNAMIC RESIZING
+    function dynamic_TextPositioning(idName, origionalTop, origionalLeft, size) {
+      var element = document.getElementById(idName);
+      var element_Top = size * origionalTop;
+      element.style.top = element_Top + "px";
+      var element_Left = size * origionalLeft;
+      element.style.left = element_Left + "px";
+    }
+    function dynamic_TextSize(className, origionalSize, size) {
+      var element_Font = size * origionalSize;
+      var elements = document.getElementsByClassName(className);
+      for (var i = 0; i < elements.length; i++) {
+        var element = elements[i];
+        element.style.fontSize = element_Font + "px";
+      }
+    }
+    function dynamic_imgSize(className, origionalHeight, origionalWidth, origionalTop, origionalLeft, size) {
+      var element = document.getElementById(className);
+      var element_Height = size * origionalHeight;
+      element.style.width = element_Height + "px";
+      var element_Width = size * origionalWidth;
+      element.style.height = element_Width + "px";
+      var element_Top = size * origionalTop;
+      element.style.top = element_Top + "px";
+      var element_Left = size * origionalLeft;
+      element.style.left = element_Left + "px";
+    }
+    function sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    window.onresize = resize;
+    function resize () {
+      var current = window.innerWidth;
+      var size = window.innerWidth/1536;
+
+      // NAVBAR RESIZE
+      dynamic_TextSize('navbar', 32, size)
+      dynamic_imgSize('navbar0', 54.5, 54.5, 32, 17, size)
+      dynamic_TextPositioning('navbar1', 37, 89, size)
+      dynamic_TextPositioning('navbar2', 37, 1038, size)
+      dynamic_TextPositioning('navbar3', 37, 1360, size)
+      // NAVBAR RESIZE
+
+      // SIDEBAR RESIZE
+      dynamic_TextSize('sidebarClickables', 32, size)
+
+      var sidebar_element = document.getElementById('sidebar0');
+      var sidebar_Height = size * 864;
+      sidebar_element.style.height = sidebar_Height + "px";
+      var sidebar_Width = size * 451.2;
+      sidebar_element.style.width = sidebar_Width + "px";
+
+      dynamic_TextPositioning('sidebar1', 117, 89, size)
+      dynamic_TextPositioning('sidebar2', 197, 89, size)
+      dynamic_TextPositioning('sidebar3', 277, 89, size)
+      dynamic_TextPositioning('sidebar4', 357, 89, size)
+      // SIDEBAR RESIZE
+
+      // MAIN TEXT RESIZE
+      var mainText_element = document.getElementById('mainText0');
+      var mainText_Font = size * 98;
+      mainText_element.style.fontSize = mainText_Font + "px";
+      var mainText_Top = size * 211;
+      mainText_element.style.top = mainText_Top + "px";
+
+      var mainText_element = document.getElementById('mainText1');
+      var mainText_Font = size * 55.5;
+      mainText_element.style.fontSize = mainText_Font + "px";
+      var mainText_Top = size * 237;
+      mainText_element.style.top = mainText_Top + "px";
+
+      var mainText_element = document.getElementById('mainText2');
+      var mainText_Font = size * 37.5;
+      mainText_element.style.fontSize = mainText_Font + "px";
+      var mainText_Top = size * 306;
+      mainText_element.style.top = mainText_Top + "px";
+      // MAIN TEXT RESIZE
+    }
+  </script>
+  <script src="./assets/js/animations.js"></script>
+</html>
+

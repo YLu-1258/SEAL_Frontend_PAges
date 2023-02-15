@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>MyToolkit</title>
+    <link rel="stylesheet" href="./assets/style.css">
+    <script src="./assets/js/tasks/calculateSleepTime.js"></script>
+  </head>
+  <body class = "elseBody" onload="resize();">
+    <!-- Navbar at the top -->
+    <img src = "./assets/svg/logo_yellow.svg" id = "navbar0" onclick = "showSidebar();" width = "54.5" height = "54.5" class = "logo" style="top: 32px; left: 17px;">
+    <div class = "navbar" id = "navbar1" onclick = "showSidebar();" style = "top: 37px; left: 89px;">MYTOOLKIT</div>
+    <div class = "navbar" id = "navbar2" style = "top: 37px; left: 1206px;opacity: 0.25;" onclick="window.location = './myday.html'">MY DAY</div>
+    <div class = "navbar" id = "navbar3" style = "top: 37px; left: 1360px;" onclick="window.location = './login.html';">LOGIN</div>
+    <!-- Navbar at the top -->
+
+    <!-- Sidebar -->
+    <img src = "./assets/svg/sidebar.svg" id = "sidebar0" width = "451.2" height = "864" class = "sidebar" style = "top:-0.5px; left:-451.2px"> <!-- small issue here, corner is not fully rounded-->
+    <div class = "sidebarClickables" id = "sidebar1" style = "top: 97px; left: 89px;opacity: 0;" onclick="window.location = 'myschedule.html'">MYSCHEDULE</div>
+    <div class = "sidebarClickables" id = "sidebar2" style = "top: 177px; left: 89px;opacity: 0;" onclick="window.location = './mygpa.html'">MYGPA</div>
+    <div class = "sidebarClickables" id = "sidebar3" style = "top: 257px; left: 89px;opacity: 0;" onclick="window.location = './myclubs.html'">MYCLUBS</div>
+    <div class = "sidebarClickables" id = "sidebar4" style = "top: 337px; left: 89px;opacity: 0;" onclick="window.location = './myday.html';">MYDAY</div>
+    <!-- Sidebar -->
+
+    <!-- Main -->
+    <img src="./assets/svg/taskboard.svg" id = "task0" width = "507" height = "auto" class = "taskboard" style = "top:91px; left:515px;">
+    <img src="./assets/svg/bullet.svg" id = "task0" width = "60" height = "auto" class = "taskboard" style = "top:114px; left:546px;">
+    <img src="./assets/svg/task.svg" id = "task0" width = "269" height = "auto" class = "taskboard" style = "top:114px; left:614px;">
+    <img src="./assets/svg/eta.svg" id = "task0" width = "100" height = "auto" class = "taskboard" style = "top:114px; left:890px;">
+    <div class = "taskEntryHolderText" id = "task0" style = "top:121px; left:637px; opacity: 0.5;">Task</div>
+    <div class = "taskEntryHolderText" id = "task0" style = "top:121px; left:909px; opacity: 0.5;">ETA</div>
+
+    <img src="./assets/svg/bullet_strikethrough.svg" id = "task0" width = "40" height = "auto" class = "taskboard" style = "top:205.5px; left:557px;opacity: 0.5;z-index: 1;">
+    <img src="./assets/svg/strikethrough.svg" id = "task0" width = "500" height = "auto" class = "taskboard" style = "top:215px; left:518px;opacity: 0.95;z-index: 1;">
+    <img src="./assets/svg/bullet.svg" id = "task0" width = "60" height = "auto" class = "taskboard" style = "top:195px; left:546px;">
+    <img src="./assets/svg/task.svg" id = "task0" width = "269" height = "auto" class = "taskboard" style = "top:195px; left:614px;">
+    <img src="./assets/svg/eta.svg" id = "task0" width = "100" height = "auto" class = "taskboard" style = "top:195px; left:890px;">
+    <div class = "taskEntryHolderText" id = "task0" style = "top:202px; left:637px; opacity: 0.5;">Task</div>
+    <div class = "taskEntryHolderText" id = "task0" style = "top:202px; left:909px; opacity: 0.5;">ETA</div>
+    
+    <img src="./assets/svg/new_task.svg" id = "task0" width = "60" height = "auto" class = "taskboard" style = "top:275px; left:738px;">
+
+    <div class = "taskETAText" id = "task0" style = "top:745px; left:398px;">Estimated sleep time: </div>
+    <!-- Main -->
+
+    </body>
+    <script src="./assets/js/animations.js"></script>
+</html>

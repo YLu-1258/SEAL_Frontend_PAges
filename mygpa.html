@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>MyToolkit</title>
+    <link rel="stylesheet" href="./assets/style.css">
+  </head>
+  <body class = "elseBody" onload="resize();">
+    <!-- Navbar at the top -->
+    <img src = "./assets/svg/logo_yellow.svg" id = "navbar0" onclick = "showSidebar();" width = "54.5" height = "54.5" class = "logo" style="top: 32px; left: 17px;">
+    <div class = "navbar" id = "navbar1" onclick = "showSidebar();" style = "top: 37px; left: 89px;">MYTOOLKIT</div>
+    <div class = "navbar" id = "navbar2" style = "top: 37px; left: 1083px;" onclick="window.location = './mygpaCompare.html'">COMPARE</div>
+    <div class = "navbar" id = "navbar2" style = "top: 37px; left: 1266px;opacity: 0.25;" onclick="window.location = './mygpa.html'">GPA</div>
+    <div class = "navbar" id = "navbar3" style = "top: 37px; left: 1360px;" onclick="window.location = './login.html';">LOGIN</div>
+    <!-- Navbar at the top -->
+
+    <!-- Sidebar -->
+    <img src = "./assets/svg/sidebar.svg" id = "sidebar0" width = "451.2" height = "864" class = "sidebar" style = "top:-0.5px; left:-451.2px"> <!-- small issue here, corner is not fully rounded-->
+    <div class = "sidebarClickables" id = "sidebar1" style = "top: 97px; left: 89px;opacity: 0;" onclick="window.location = 'myschedule.html'">MYSCHEDULE</div>
+    <div class = "sidebarClickables" id = "sidebar2" style = "top: 177px; left: 89px;opacity: 0;" onclick="window.location = './mygpa.html'">MYGPA</div>
+    <div class = "sidebarClickables" id = "sidebar3" style = "top: 257px; left: 89px;opacity: 0;" onclick="window.location = './myclubs.html'">MYCLUBS</div>
+    <div class = "sidebarClickables" id = "sidebar4" style = "top: 337px; left: 89px;opacity: 0;" onclick="window.location = './myday.html';">MYDAY</div>
+    <!-- Sidebar -->
+
+    <!-- Main -->
+    <img src="./assets/svg/gpa_box.svg" id = "gpa0" width = "507" height = "auto" class = "taskboard" style = "top:91px; left:515px;">
+    <img src="./assets/svg/gpa_text_entry.svg" id = "gpa0" width = "440" height = "auto" class = "taskboard" style = "top:157px; left:549px;">
+    <img src="./assets/svg/gpa_text_entry.svg" id = "gpa0" width = "440" height = "auto" class = "taskboard" style = "top:245px; left:549px;">
+    <img src="./assets/svg/gpa_text_entry.svg" id = "gpa0" width = "440" height = "auto" class = "taskboard" style = "top:333px; left:549px;">
+    <img src="./assets/svg/gpa_text_entry.svg" id = "gpa0" width = "440" height = "auto" class = "taskboard" style = "top:421px; left:549px;">
+    <img src="./assets/svg/gpa_text_entry.svg" id = "gpa0" width = "440" height = "auto" class = "taskboard" style = "top:509px; left:549px;">
+    <img src="./assets/svg/gpa_text_entry.svg" id = "gpa0" width = "440" height = "auto" class = "taskboard" style = "top:597px; left:549px;">
+    <form >
+      <input type="text" id="fives" name="fives" class = "gpaEntryHolderText" id = "gpa0" style = "top:171px; left:591px; opacity: 0.25;" placeholder="Number of 5 point As"><br>
+      <input type="text" id="fours" name="fours" class = "gpaEntryHolderText" id = "gpa0" style = "top:259px; left:591px; opacity: 0.25;" placeholder="Number of 4 point As">
+      <input type="text" id="threes" name="threes" class = "gpaEntryHolderText" id = "gpa0" style = "top:347px; left:591px; opacity: 0.25;" placeholder="Number of Bs">
+      <input type="text" id="twos" name="twos"  class = "gpaEntryHolderText" id = "gpa0" style = "top:435px; left:591px; opacity: 0.25;" placeholder="Number of Cs">
+      <input type="text" id="ones" name="ones" class = "gpaEntryHolderText" id = "gpa0" style = "top:523px; left:591px; opacity: 0.25;" placeholder="Number of Ds">
+      <input type="text" id="zeroes" name="zeroes" class = "gpaEntryHolderText" id = "gpa0" style = "top:611px; left:591px; opacity: 0.25;" placeholder="Number of Fs">
+    </form>
+    <btn onclick="console.log('clicked')" style = "top:611px; left:591px">submit</btn>
+
+    <div class = "totalGpaText" id = "gpa0" style = "top:745px; left:409px;">4.33 Weighted | 4.00 Unweighted</div>
+    <!-- Main -->
+
+    </body>
+    <script></script>
+    <script src="./assets/js/animations.js"></script>
+</html>

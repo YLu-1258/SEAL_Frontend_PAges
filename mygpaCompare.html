@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>MyToolkit</title>
+    <link rel="stylesheet" href="./assets/style.css">
+  </head>
+  <body class = "elseBody" onload="resize();">
+    <!-- Navbar at the top -->
+    <img src = "./assets/svg/logo_yellow.svg" id = "navbar0" onclick = "showSidebar();" width = "54.5" height = "54.5" class = "logo" style="top: 32px; left: 17px;">
+    <div class = "navbar" id = "navbar1" onclick = "showSidebar();" style = "top: 37px; left: 89px;">MYTOOLKIT</div>
+    <div class = "navbar" id = "navbar2" style = "top: 37px; left: 1083px;opacity: 0.25;" onclick="window.location = './mygpaCompare.html'">COMPARE</div>
+    <div class = "navbar" id = "navbar2" style = "top: 37px; left: 1266px;" onclick="window.location = './mygpa.html'">GPA</div>
+    <div class = "navbar" id = "navbar3" style = "top: 37px; left: 1360px;" onclick="window.location = './login.html';">LOGIN</div>
+    <!-- Navbar at the top -->
+
+    <!-- Sidebar -->
+    <img src = "./assets/svg/sidebar.svg" id = "sidebar0" width = "451.2" height = "864" class = "sidebar" style = "top:-0.5px; left:-451.2px"> <!-- small issue here, corner is not fully rounded-->
+    <div class = "sidebarClickables" id = "sidebar1" style = "top: 97px; left: 89px;opacity: 0;" onclick="window.location = 'myschedule.html'">MYSCHEDULE</div>
+    <div class = "sidebarClickables" id = "sidebar2" style = "top: 177px; left: 89px;opacity: 0;" onclick="window.location = './mygpa.html'">MYGPA</div>
+    <div class = "sidebarClickables" id = "sidebar3" style = "top: 257px; left: 89px;opacity: 0;" onclick="window.location = './myclubs.html'">MYCLUBS</div>
+    <div class = "sidebarClickables" id = "sidebar4" style = "top: 337px; left: 89px;opacity: 0;" onclick="window.location = './myday.html';">MYDAY</div>
+    <!-- Sidebar -->
+
+    <!-- Main -->
+    <img src="./assets/svg/gpa_box.svg" id = "gpa0" width = "507" height = "auto" class = "taskboard" style = "top:91px; left:515px;">
+    <img src="./assets/svg/gpa_compare_box.svg" id = "gpa0" width = "440" height = "auto" class = "taskboard" style = "top:163px; left:549px;">
+    <img src="./assets/svg/gpa_compare_box.svg" id = "gpa0" width = "440" height = "auto" class = "taskboard" style = "top:268px; left:549px;">
+    <img src="./assets/svg/gpa_compare_box.svg" id = "gpa0" width = "440" height = "auto" class = "taskboard" style = "top:373px; left:549px;">
+    <img src="./assets/svg/gpa_compare_box.svg" id = "gpa0" width = "440" height = "auto" class = "taskboard" style = "top:478px; left:549px;">
+    <img src="./assets/svg/gpa_compare_box.svg" id = "gpa0" width = "440" height = "auto" class = "taskboard" style = "top:583px; left:549px;">
+    <div class = "gpaCompareText" id = "gpa0" style = "top:178px; left:615px">Average GPA: 3.98</div>
+    <div class = "gpaCompareText" id = "gpa0" style = "top:283px; left:603px">Average UGPA: 3.72</div>
+    <div class = "gpaCompareText" id = "gpa0" style = "top:388px; left:624px">Lowest GPA: 2.50</div>
+    <div class = "gpaCompareText" id = "gpa0" style = "top:493px; left:619px">Highest GPA: 4.48</div>
+    <div class = "gpaCompareText" id = "gpa0" style = "top:598px; left:589px">Your Position: 16/403</div>
+
+    <div class = "totalGpaText" id = "gpa0" style = "top:745px; left:364px;">You are in the top 4% of students!</div>
+    <!-- Main -->
+
+    </body>
+    <script></script>
+    <script src="./assets/js/animations.js"></script>
+</html>
