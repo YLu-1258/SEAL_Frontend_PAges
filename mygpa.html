@@ -40,9 +40,23 @@
       <input type="text" id="ones" name="ones" class = "gpaEntryHolderText" id = "gpa0" style = "top:523px; left:591px; opacity: 0.25;" placeholder="Number of Ds">
       <input type="text" id="zeroes" name="zeroes" class = "gpaEntryHolderText" id = "gpa0" style = "top:611px; left:591px; opacity: 0.25;" placeholder="Number of Fs">
     </form>
-    <btn onclick="console.log('clicked')" style = "top:611px; left:591px">submit</btn>
+    <btn onclick="go()" style = "top:611px; left:591px" id="submitGpa">submit</btn>
 
     <div class = "totalGpaText" id = "gpa0" style = "top:745px; left:409px;">4.33 Weighted | 4.00 Unweighted</div>
+    <script>
+      function go() {
+        fives = document.getElementById("fives").value
+        fours = document.getElementById("fours").value
+        threes = document.getElementById("threes").value
+        twos = document.getElementById("twos").value
+        ones = document.getElementById("ones").value
+        zeroes = document.getElementById("zeroes").value
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.open("PUT", "http://seal.nighthawkcodingsociety.com/api/users/gpa/update", false); // false for synchronous request
+        xmlHttp.send(JSON.stringify({"username": eris29, "fives": fives, "fours": fours, "threes": threes, "twos": twos, "ones": ones, "zeroes": zeroes, }));
+        console.log(json)        
+      }
+    </script>
     <!-- Main -->
 
     </body>

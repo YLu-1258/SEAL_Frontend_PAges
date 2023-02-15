@@ -157,10 +157,7 @@
         xmlHttp.send(JSON.stringify({"username": username, "password": password}));
         json = JSON.parse(xmlHttp.responseText);
         document.cookie = "username="+json;
-        console.log(json)
-
-        
-
+        console.log(json)        
       }
     }
   </script>
