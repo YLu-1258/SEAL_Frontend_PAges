@@ -56,6 +56,21 @@
     </body>
     <script src="./assets/js/animations.js"></script>
     <script> // work on speeding up this execution
+      function getCookie(cname) {
+        let name = cname + "=";
+        let decodedCookie = decodeURIComponent(document.cookie);
+        let ca = decodedCookie.split(';');
+        for(let i = 0; i <ca.length; i++) {
+          let c = ca[i];
+          while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+          }
+          if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+          }
+        }
+        return "";
+      }
       function checkValue (entryid, holderid, type) {
         console.log(entryid, holderid, type)
         console.log(side==type)
@@ -87,17 +102,29 @@
           document.getElementById("saveText").style.opacity = "0.5";
         }
       }
+      function httpPUT(body) {
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.open("PUT", "https://seal.nighthawkcodingsociety.com/api/users/schedules/update", false);
+        xmlHttp.send(body);
+        json = JSON.parse(xmlHttp.responseText);
+        return json;
+      }
       function go() {
-        if ((document.getElementById("login3").src).includes("yellow")) {
-          username = document.getElementById("username").value
-          password = document.getElementById("password").value
-          console.log("Trying to authenticate " + username + " and password " + password)
-          var xmlHttp = new XMLHttpRequest();
-          xmlHttp.open("GET", "http://seal.nighthawkcodingsociety.com/api/users/auth", false); // false for synchronous request
-          xmlHttp.send(JSON.stringify({"username": username, "password": password}));
-          json = JSON.parse(xmlHttp.responseText);
-          document.cookie = "username="+json;
-          console.log(json)
+        if ((document.getElementById("save").src).includes("yellow")) {
+          body = {
+              username: getCookie("username"),
+              per1: document.getElementById("class0entry").value,
+              per2: document.getElementById("class1entry").value,
+              per3: document.getElementById("class2entry").value,
+              per4: document.getElementById("class3entry").value,
+              per5: document.getElementById("class4entry").value,
+              teach1: document.getElementById("teach0entry").value,
+              teach2: document.getElementById("teach1entry").value,
+              teach3: document.getElementById("teach2entry").value,
+              teach4: document.getElementById("teach3entry").value,
+              teach5: document.getElementById("teach4entry").value
+          }
+          httpPUT(body);
         }
       }
     </script>
