@@ -1,4 +1,3 @@
-<form action="javascript:review()">
     Email: <input type="text" id="username" required>
     <br>
     <br>
@@ -21,19 +20,61 @@
     <br>
     <br>
     <div id="error"></div>
-    <button>Submit</button>
+    <button onclick="test()">Submit</button>
     <br>
-</form>
 
 
 <script>
-    fetch("https://seal.nighthawkcodingsociety.com/api/users/classreview")
+   function test(){
+        //Validate Password (must be 6-20 characters in len)
+        //verifyPassword("click");
+        const body = {
+            username: getCookie("username"),
+            className: document.getElementById("className").value,
+            difficulty: document.getElementById("difficulty").value,
+            hoursOfHw: document.getElementById("hoursOfHw").value,
+            daysBtwTest: document.getElementById("daysBtwTest").value,
+            memorizationLevel: document.getElementById("memorizationLevel").value,
+            comments: document.getElementById("comments").value
+        };
+        const requestOptions = {
+            method: 'POST',
+            body: JSON.stringify(body),
+            headers: {
+                "content-type": "application/json",
+                'Authorization': 'Bearer my-token',
+            },
+        };
+
+        // URL for Create API
+        // Fetch API call to the database to create a new user
+        fetch("https://seal.nighthawkcodingsociety.com/api/users/createclassreview", requestOptions)
           .then(response => {
             // trap error response from Web API
-            response.json().then(data => {
-                console.log(data);
-            })
+            if (response.status !== 200) {
+              const errorMsg = 'Database create error: ' + response.status;
+              console.log(errorMsg);
             }
             // response contains valid result
-        )
+            console.log("hi");
+        })
+        //update_display()
+      }
+
+      function getCookie(cname) {
+        let name = cname + "=";
+        let decodedCookie = decodeURIComponent(document.cookie);
+        let ca = decodedCookie.split(';');
+        for(let i = 0; i <ca.length; i++) {
+          let c = ca[i];
+          while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+          }
+          if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+          }
+        }
+        return "";
+      }
+
 </script>
