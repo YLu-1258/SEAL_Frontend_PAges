@@ -164,7 +164,7 @@ input[type="password"] {font-family: OpenSansBold;background: transparent;border
     font-size: 47px;
 }
 .scheduleTextSmall {
-    position: relative;
+    position: absolute;
     z-index: 1;
     font-size: 29px;
 }
