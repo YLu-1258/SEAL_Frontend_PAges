@@ -102,13 +102,6 @@
           document.getElementById("saveText").style.opacity = "0.5";
         }
       }
-      function httpPUT(body) {
-        var xmlHttp = new XMLHttpRequest();
-        xmlHttp.open("PUT", "https://seal.nighthawkcodingsociety.com/api/users/schedules/update", false);
-        xmlHttp.send(body);
-        json = JSON.parse(xmlHttp.responseText);
-        return json;
-      }
       function go() {
         if ((document.getElementById("save").src).includes("yellow")) {
           body = {
@@ -124,8 +117,24 @@
               teach4: document.getElementById("teach3entry").value,
               teach5: document.getElementById("teach4entry").value
           }
-          data = httpPUT(body);
-          console.log(data)
+          const requestOptions = {
+              method: 'POST',
+              body: JSON.stringify(body),
+              headers: {
+                  "content-type": "application/json",
+                  'Authorization': 'Bearer my-token',
+              },
+          };
+            fetch("https://seal.nighthawkcodingsociety.com/api/users/schedules/update", requestOptions)
+              .then(response => {
+                // trap error response from Web API
+                if (response.status !== 200) {
+                  const errorMsg = 'Database create error: ' + response.status;
+                  console.log(errorMsg);
+                }
+                // response contains valid result
+            })
+            console.log(data)
         }
       }
     </script>
