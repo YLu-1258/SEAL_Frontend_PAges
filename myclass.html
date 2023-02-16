@@ -24,3 +24,16 @@
     <button>Submit</button>
     <br>
 </form>
+
+
+<script>
+    fetch("https://seal.nighthawkcodingsociety.com/api/users/classreview")
+          .then(response => {
+            // trap error response from Web API
+            response.json().then(data => {
+                console.log(data);
+            })
+            }
+            // response contains valid result
+        )
+</script>

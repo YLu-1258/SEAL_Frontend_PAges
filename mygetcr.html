@@ -1,0 +1,66 @@
+<div id="getReview"></div>
+
+
+<script>
+    fetch("https://seal.nighthawkcodingsociety.com/api/users/classreview")
+          .then(response => {
+            // trap error response from Web API
+            response.json().then(data => {
+                console.log(data);
+                
+                var p = document.createElement("p");
+                let br = document.createElement("br");
+
+                
+                console.log(data[0].className);
+
+                /*
+                p.appendChild(document.createTextNode("Class Name: " + data[0].className)); 
+                document.getElementById("getReview").appendChild(p);
+                document.getElementById("getReview").appendChild(br);
+                p = document.createElement("p");
+                p.appendChild(document.createTextNode("Class Name: " + data[0].className)); 
+                document.getElementById("getReview").appendChild(p);
+                */
+
+                for (let i = 0; i < data.length; i++) {
+                
+                    p = document.createElement("p");
+                    p.appendChild(document.createTextNode("Class Name: " + data[i].className)); 
+                    document.getElementById("getReview").appendChild(p);
+
+                    p = document.createElement("p");
+                    p.appendChild(document.createTextNode("Class Name: " + data[i].comments)); 
+                    document.getElementById("getReview").appendChild(p);
+
+                    p = document.createElement("p");
+                    p.appendChild(document.createTextNode("Days Between Tests: " + data[i].daysBtwTest)); 
+                    document.getElementById("getReview").appendChild(p);
+
+                    p = document.createElement("p");
+                    p.appendChild(document.createTextNode("Difficulty: " + data[i].difficulty)); 
+                    document.getElementById("getReview").appendChild(p);
+
+                    p = document.createElement("p");
+                    p.appendChild(document.createTextNode("Hours of homework: " + data[i].hoursOfHw)); 
+                    document.getElementById("getReview").appendChild(p);
+
+                    p = document.createElement("p");
+                    p.appendChild(document.createTextNode("Memorization Level: " + data[i].memorizationLevel)); 
+                    document.getElementById("getReview").appendChild(p);
+
+                    p = document.createElement("p");
+                    p.appendChild(document.createTextNode("User id: " + data[i].user_id)); 
+                    document.getElementById("getReview").appendChild(p);
+
+
+
+            
+
+                }
+                
+            })
+            }
+            // response contains valid result
+        )
+</script>
