@@ -152,14 +152,50 @@
         username = document.getElementById("username").value
         password = document.getElementById("password").value
         console.log("Trying to authenticate " + username + " and password " + password)
-        var xmlHttp = new XMLHttpRequest();
-        xmlHttp.open("GET", "http://seal.nighthawkcodingsociety.com/api/users/auth", false); // false for synchronous request
-        xmlHttp.send(JSON.stringify({"username": username, "password": password}));
-        json = JSON.parse(xmlHttp.responseText);
-        document.cookie = "username="+json;
-        console.log(json)        
+        const body = {
+            username: username,
+            password: password
+        };
+
+        const read_options = {
+          method: 'POST', // *GET, POST, PUT, DELETE, etc.
+          mode: 'cors', // no-cors, *cors, same-origin
+          cache: 'default', // *default, no-cache, reload, force-cache, only-if-cached
+          body: JSON.stringify(body),
+          credentials: 'omit', // include, *same-origin, omit
+          headers: {
+            'Content-Type': 'application/json'
+          },
+        };
+        
+
+        // fetch the data from API
+        fetch("https://seal.nighthawkcodingsociety.com/api/users/auth", read_options)
+          // response is a RESTful "promise" on any successful fetch
+          .then(response => {
+            // check for response errors
+            if (response.status !== 200) {
+                const errorMsg = 'Database read error: ' + response.status;
+                console.log(errorMsg);
+                return;
+            }
+            // valid response will have json data
+            response.json().then(data => {
+              if (data !== null) {
+                document.cookie = "username="+data; 
+              }
+              else {
+                console.log("Invalid credentials");
+              }
+            })
+        })
+        // catch fetch errors (ie ACCESS to server blocked)
+        .catch(err => {
+          console.error(err);
+        });
       }
-    }
+              
+      }
   </script>
   <script src="./assets/js/animations.js"></script>
 </html>
