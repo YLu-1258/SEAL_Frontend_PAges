@@ -134,3 +134,22 @@ input[type="password"] {font-family: OpenSansBold;background: transparent;border
     position: absolute;
     font-size: 34px;
 }
+/* schedule */
+.scheduleTop {
+    position: absolute;
+    z-index: 1;
+}
+.scheduleMid {
+    position: absolute;
+    z-index: 0;
+}
+.scheduleBot {
+    position: absolute;
+    z-index: 0;
+}
+.scheduleEntryHolderText {
+    color: rgb(83, 84, 84);
+    position: absolute;
+    font-size: 24px;
+    z-index: 1;
+}
