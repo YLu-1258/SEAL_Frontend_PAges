@@ -7,7 +7,7 @@
     <title>MyToolkit</title>
     <link rel="stylesheet" href="./assets/style.css">
   </head>
-  <body class = "elseBody" onload="resize();">
+  <body class = "elseBody" onload="resize();update_gpa()">
     <!-- Navbar at the top -->
     <img src = "./assets/svg/logo_yellow.svg" id = "navbar0" onclick = "showSidebar();" width = "54.5" height = "54.5" class = "logo" style="top: 32px; left: 17px;">
     <div class = "navbar" id = "navbar1" onclick = "showSidebar();" style = "top: 37px; left: 89px;">MYTOOLKIT</div>
@@ -42,7 +42,7 @@
     </form>
     <button onclick="update_gpa()" class = "gpaEntryHolderText" style = "top:30em; left:709px; background-color:yellow;" id="submitGpa">submit</button>
 
-    <div class = "totalGpaText" id = "gpa0" style = "top:900px; left:409px;">4.33 Weighted | 4.00 Unweighted</div>
+    <div class = "totalGpaText" id="gpa1" style = "top:900px; left:409px;">4.33 Weighted | 4.00 Unweighted</div>
     <script>
       function update_gpa(){
         //Validate Password (must be 6-20 characters in len)
@@ -126,6 +126,47 @@
           }
         }
         return "";
+      }
+    
+      function update_gpa() {
+        // prepare fetch options
+        let username = getCookie("username")
+        console.log(username)
+        const read_options = {
+          method: 'GET', // *GET, POST, PUT, DELETE, etc.
+          mode: 'cors', // no-cors, *cors, same-origin
+          cache: 'default', // *default, no-cache, reload, force-cache, only-if-cached
+          credentials: 'omit', // include, *same-origin, omit
+          headers: {
+            'Content-Type': 'application/json'
+          },
+        };
+
+        // fetch the data from API
+        fetch("https://seal.nighthawkcodingsociety.com/api/users/gpa", read_options)
+          // response is a RESTful "promise" on any successful fetch
+          .then(response => {
+            // check for response errors
+            if (response.status !== 200) {
+                const errorMsg = 'Database read error: ' + response.status;
+                console.log(errorMsg);
+                return;
+            }
+            // valid response will have json data
+            response.json().then(data => {
+                for (let i = 0; i<data.length; i++) {
+                    if (data[i]["username"] == username) {
+                        let string = String(data[i]["avg_w_gpa"]) + " Weighted | " + String(data[i]["avg_uw_gpa"]) + " Unweighted";
+                        document.getElementById("gpa1").innerHTML = string;
+                        console.log(string);
+                    }
+                }
+            })
+        })
+        // catch fetch errors (ie ACCESS to server blocked)
+        .catch(err => {
+          console.error(err);
+        });
       }
     </script>
     <!-- Main -->
