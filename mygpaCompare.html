@@ -37,7 +37,7 @@
     <div class = "gpaCompareText" id = "gpa4" style = "top:493px; left:619px">Highest GPA: 4.48</div>
     <div class = "gpaCompareText" id = "gpa5" style = "top:598px; left:589px">Your Position: 16/403</div>
 
-    <div class = "totalGpaText" id = "gpa0" style = "top:745px; left:364px;">You are in the top 4% of students!</div>
+    <div class = "totalGpaText" id = "gpa6" style = "top:745px; left:364px;">You are in the top 4% of students!</div>
     <!-- Main -->
 
     </body>
@@ -215,10 +215,11 @@
               for (let i = 0; i < unique.length; i++){
                 if (unique[i] == res) {
                   let user_pos = unique.length-i;
-                  let percentage = (unique.length-i)/total;
+                  let percentage = Math.floor(((unique.length-i)/total)*100);
                   document.getElementById("gpa3").innerHTML = "Lowest GPA: " + unique[0];
                   document.getElementById("gpa4").innerHTML = "Highest GPA: " + unique.at(-1);
                   document.getElementById("gpa5").innerHTML = "Your Position: " + user_pos.toString() + "/" + total.toString();
+                  document.getElementById("gpa6").innerHTML = "You are in the top " + percentage + "% of students!";
                 }
               }
             })
@@ -268,5 +269,11 @@
         });
       }
       
+      function updateall(){
+        get_gpa_of_user();
+        calculate_Average_Unweighted();
+        calculate_Average_Weighted();
+        get_user_position();
+      }
     </script>
 </html>
