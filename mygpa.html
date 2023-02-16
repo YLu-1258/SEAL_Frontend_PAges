@@ -7,7 +7,7 @@
     <title>MyToolkit</title>
     <link rel="stylesheet" href="./assets/style.css">
   </head>
-  <body class = "elseBody" onload="resize();update_gpa()">
+  <body class = "elseBody" onload="resize();update_display()">
     <!-- Navbar at the top -->
     <img src = "./assets/svg/logo_yellow.svg" id = "navbar0" onclick = "showSidebar();" width = "54.5" height = "54.5" class = "logo" style="top: 32px; left: 17px;">
     <div class = "navbar" id = "navbar1" onclick = "showSidebar();" style = "top: 37px; left: 89px;">MYTOOLKIT</div>
@@ -128,7 +128,7 @@
         return "";
       }
     
-      function update_gpa() {
+      function update_display() {
         // prepare fetch options
         let username = getCookie("username")
         console.log(username)
