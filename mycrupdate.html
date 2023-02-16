@@ -1,0 +1,127 @@
+    Email: <input type="text" id="username" required>
+    <br>
+    <br>
+    Class name: <input type="text" id="className" required>
+    <br>
+    <br>
+    Difficulty: <input type="text" id="difficulty" required>
+    <br>
+    <br>
+    Hours of homework per day: <input type="text" id="hoursOfHw" required>
+    <br>
+    <br>
+    Days between tests: <input type="text" id="daysBtwTest" required>
+    <br>
+    <br>
+    Memorization level: <input type="text" id="memorizationLevel" required>
+    <br>
+    <br>
+    Comments: <input type="text" id="comments" required>
+    <br>
+    <br>
+    <div id="error"></div>
+    <button onclick="test()">Submit</button>
+    <br>
+
+
+<script>
+   function test(){
+    console.log(getCookie("username"));
+      //Validate Password (must be 6-20 characters in len)
+      //verifyPassword("click");
+      const body = {
+          username: getCookie("username"),
+          className: document.getElementById("className").value,
+          difficulty: document.getElementById("difficulty").value,
+          hoursOfHw: document.getElementById("hoursOfHw").value,
+          daysBtwTest: document.getElementById("daysBtwTest").value,
+          memorizationLevel: document.getElementById("memorizationLevel").value,
+          comments: document.getElementById("comments").value
+      };
+      const requestOptions = {
+          method: 'POST',
+          body: JSON.stringify(body),
+          headers: {
+              "content-type": "application/json",
+              'Authorization': 'Bearer my-token',
+          },
+      };
+
+      // URL for Create API
+      // Fetch API call to the database to create a new user
+      fetch("https://seal.nighthawkcodingsociety.com/api/users/updateclassreview", requestOptions)
+        .then(response => {
+          // trap error response from Web API
+          if (response.status !== 200) {
+            const errorMsg = 'Database create error: ' + response.status;
+            console.log(errorMsg);
+          }
+          // response contains valid result
+          update_display()
+      })
+      //update_display()
+  }
+
+      function getCookie(cname) {
+        let name = cname + "=";
+        let decodedCookie = decodeURIComponent(document.cookie);
+        let ca = decodedCookie.split(';');
+        for(let i = 0; i <ca.length; i++) {
+          let c = ca[i];
+          while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+          }
+          if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+          }
+        }
+        return "";
+      }
+
+
+
+       
+
+
+      function update_display() {
+        // prepare fetch options
+        let username = getCookie("username")
+        console.log(username)
+        const read_options = {
+          method: 'GET', // *GET, POST, PUT, DELETE, etc.
+          mode: 'cors', // no-cors, *cors, same-origin
+          cache: 'default', // *default, no-cache, reload, force-cache, only-if-cached
+          credentials: 'omit', // include, *same-origin, omit
+          headers: {
+            'Content-Type': 'application/json'
+          },
+        };
+
+
+
+        // fetch the data from API
+        fetch("https://seal.nighthawkcodingsociety.com/api/users/classReview", read_options)
+          // response is a RESTful "promise" on any successful fetch
+          .then(response => {
+            // check for response errors
+            if (response.status !== 200) {
+                const errorMsg = 'Database read error: ' + response.status;
+                console.log(errorMsg);
+                return;
+            }
+            // valid response will have json data
+            response.json().then(data => {
+                console.log(data);
+            })
+        })
+        // catch fetch errors (ie ACCESS to server blocked)
+        .catch(err => {
+          console.error(err);
+        });
+      }
+      
+    
+     
+    
+
+</script>
