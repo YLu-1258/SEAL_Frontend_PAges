@@ -40,23 +40,76 @@
       <input type="text" id="ones" name="ones" class = "gpaEntryHolderText" id = "gpa0" style = "top:523px; left:591px; opacity: 0.25;" placeholder="Number of Ds">
       <input type="text" id="zeroes" name="zeroes" class = "gpaEntryHolderText" id = "gpa0" style = "top:611px; left:591px; opacity: 0.25;" placeholder="Number of Fs">
     </form>
-    <button onclick="go()" class = "gpaEntryHolderText" style = "top:30em; left:709px; background-color:yellow;" id="submitGpa">submit</button>
+    <button onclick="update_gpa()" class = "gpaEntryHolderText" style = "top:30em; left:709px; background-color:yellow;" id="submitGpa">submit</button>
 
     <div class = "totalGpaText" id = "gpa0" style = "top:900px; left:409px;">4.33 Weighted | 4.00 Unweighted</div>
     <script>
-      function go() {
-        cookie = getCookie("username");
-        username = document
-        fives = document.getElementById("fives").value
-        fours = document.getElementById("fours").value
-        threes = document.getElementById("threes").value
-        twos = document.getElementById("twos").value
-        ones = document.getElementById("ones").value
-        zeroes = document.getElementById("zeroes").value
-        var xmlHttp = new XMLHttpRequest();
-        xmlHttp.open("PUT", "https://seal.nighthawkcodingsociety.com/api/users/gpa/update", false); // false for synchronous request
-        xmlHttp.send(JSON.stringify({"username": "eris29", "fives": fives, "fours": fours, "threes": threes, "twos": twos, "ones": ones, "zeroes": zeroes}));
-        console.log(json)        
+      function update_gpa(){
+        //Validate Password (must be 6-20 characters in len)
+        //verifyPassword("click");
+        const body = {
+            username: getCookie("username"),
+            fives : document.getElementById("fives").value,
+            fours : document.getElementById("fours").value,
+            threes : document.getElementById("threes").value,
+            twos : document.getElementById("twos").value,
+            ones : document.getElementById("ones").value,
+            zeroes : document.getElementById("zeroes").value
+        };
+        const requestOptions = {
+            method: 'POST',
+            body: JSON.stringify(body),
+            headers: {
+                "content-type": "application/json",
+                'Authorization': 'Bearer my-token',
+            },
+        };
+
+        // URL for Create API
+        // Fetch API call to the database to create a new user
+        fetch("https://seal.nighthawkcodingsociety.com/api/users/gpa/update", requestOptions)
+          .then(response => {
+            // trap error response from Web API
+            if (response.status !== 200) {
+              const errorMsg = 'Database create error: ' + response.status;
+              console.log(errorMsg);
+            }
+            // response contains valid result
+        })
+      }
+
+      function read_users() {
+        // prepare fetch options
+        
+        const read_options = {
+          method: 'GET', // *GET, POST, PUT, DELETE, etc.
+          mode: 'cors', // no-cors, *cors, same-origin
+          cache: 'default', // *default, no-cache, reload, force-cache, only-if-cached
+          credentials: 'omit', // include, *same-origin, omit
+          headers: {
+            'Content-Type': 'application/json'
+          },
+        };
+
+        // fetch the data from API
+        fetch("https://seal.nighthawkcodingsociety.com/api/users/gpa", read_options)
+          // response is a RESTful "promise" on any successful fetch
+          .then(response => {
+            // check for response errors
+            if (response.status !== 200) {
+                const errorMsg = 'Database read error: ' + response.status;
+                console.log(errorMsg);
+                return;
+            }
+            // valid response will have json data
+            response.json().then(data => {
+                console.log(data);
+            })
+        })
+        // catch fetch errors (ie ACCESS to server blocked)
+        .catch(err => {
+          console.error(err);
+        });
       }
 
       function getCookie(cname) {
