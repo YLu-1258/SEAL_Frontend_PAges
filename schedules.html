@@ -102,7 +102,43 @@
           document.getElementById("saveText").style.opacity = "0.5";
         }
       }
+      function update_display() {
+        // prepare fetch options
+        let username = getCookie("username")
+        console.log(username)
+        const read_options = {
+          method: 'GET', // *GET, POST, PUT, DELETE, etc.
+          mode: 'cors', // no-cors, *cors, same-origin
+          cache: 'default', // *default, no-cache, reload, force-cache, only-if-cached
+          credentials: 'omit', // include, *same-origin, omit
+          headers: {
+            'Content-Type': 'application/json'
+          },
+        };
+
+        // fetch the data from API
+        fetch("https://seal.nighthawkcodingsociety.com/api/users/schedules", read_options)
+          // response is a RESTful "promise" on any successful fetch
+          .then(response => {
+            // check for response errors
+            if (response.status !== 200) {
+                const errorMsg = 'Database read error: ' + response.status;
+                console.log(errorMsg);
+                return;
+            }
+            // valid response will have json data
+            response.json().then(data => {
+             console.log(data)
+            })
+        })
+        // catch fetch errors (ie ACCESS to server blocked)
+        .catch(err => {
+          console.error(err);
+        });
+      }
+
       function go() {
+        update_display()
         if ((document.getElementById("save").src).includes("yellow")) {
           body = {
               username: getCookie("username"),
@@ -135,7 +171,6 @@
                 }
                 // response contains valid result
             })
-            console.log(data)
         }
       }
     </script>
