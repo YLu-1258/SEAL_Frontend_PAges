@@ -1,26 +1,101 @@
-    Email: <input type="text" id="username" required>
-    <br>
-    <br>
-    Class name: <input type="text" id="className" required>
-    <br>
-    <br>
-    Difficulty: <input type="text" id="difficulty" required>
-    <br>
-    <br>
-    Hours of homework per day: <input type="text" id="hoursOfHw" required>
-    <br>
-    <br>
-    Days between tests: <input type="text" id="daysBtwTest" required>
-    <br>
-    <br>
-    Memorization level: <input type="text" id="memorizationLevel" required>
-    <br>
-    <br>
-    Comments: <input type="text" id="comments" required>
-    <br>
-    <br>
-    <div id="error"></div>
-    <button onclick="test()">Submit</button>
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>MyToolkit</title>
+    <link rel="stylesheet" href="./assets/style.css">
+  </head>
+  <body class = "elseBody" onload="resize(); update_gpa();">
+    <!-- Navbar at the top -->
+    <img src = "./assets/svg/logo_yellow.svg" id = "navbar0" onclick = "showSidebar();" width = "54.5" height = "54.5" class = "logo" style="top: 32px; left: 17px;">
+    <div class = "navbar" id = "navbar1" onclick = "showSidebar();" style = "top: 37px; left: 89px;">MYTOOLKIT</div>
+    <div class = "navbar" id = "navbar2" style = "top: 37px; left: 1050px;" onclick="window.location = './mycrupdate.html'">SUBMIT REVIEWS</div>
+    <div class = "navbar" id = "navbar2" style = "top: 37px; left: 775px;opacity: 0.25;" onclick="window.location = './mygetcr.html'">CLASS REVIEWS</div>
+    <div class = "navbar" id = "navbar3" style = "top: 37px; left: 1360px;" onclick="window.location = './login.html';">LOGIN</div>
+    <!-- Navbar at the top -->
+
+    <!-- Sidebar -->
+    <img src = "./assets/svg/sidebar.svg" id = "sidebar0" width = "451.2" height = "864" class = "sidebar" style = "top:-0.5px; left:-451.2px"> <!-- small issue here, corner is not fully rounded-->
+    <div class = "sidebarClickables" id = "sidebar1" style = "top: 97px; left: 89px;opacity: 0;" onclick="window.location = 'myschedule.html'">MYSCHEDULE</div>
+    <div class = "sidebarClickables" id = "sidebar2" style = "top: 177px; left: 89px;opacity: 0;" onclick="window.location = './mygpa.html'">MYGPA</div>
+    <div class = "sidebarClickables" id = "sidebar3" style = "top: 257px; left: 89px;opacity: 0;" onclick="window.location = './mycrupdate.html'">MYCLUBS</div>
+    <div class = "sidebarClickables" id = "sidebar4" style = "top: 337px; left: 89px;opacity: 0;" onclick="window.location = './myday.html';">MYDAY</div>
+    <!-- Sidebar -->
+  </body>
+<style>
+
+  body {
+    display: grid;
+    height: 200vh;
+  }
+  
+  .main {
+
+    place-self: center !important;
+    background-color: rgba(255, 196, 0, 0.75);
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 50px;
+    padding-bottom: 75px;
+    border-radius: 5em;
+  }
+
+  .reviewsInput {
+    background-color: rgba(255, 244, 93, 0.75) !important;
+    padding-left: 2em;
+    padding-right: 2em;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    width: 400px;
+    border-radius: 20px;
+  }
+
+  .submit{
+    padding-left: 5em;
+    padding-right: 5em;
+    padding-top: 1em;
+    padding-bottom: 1em;'
+    margin-top: 6em;
+    position: relative !important;
+    left: 30%;
+    background-color: rgba(255, 196, 0, 0.75) !important;
+    border: none;
+    border-radius:20px;
+    color: rgb(83,83,83);
+    font-weight: bold;
+    
+
+  }
+</style>
+
+<div class="main" id="clubs0">
+  <input type="text" class="reviewsInput" placeholder="Email" id="username" required>
+  <br>
+  <br>
+  <input type="text" class="reviewsInput" placeholder="Class Name" id="className" required>
+  <br>
+  <br>
+  <input type="text" class="reviewsInput" placeholder="Difficulty" id="difficulty" required>
+  <br>
+  <br>
+  <input type="text" class="reviewsInput" placeholder="Hours of homework per day" id="hoursOfHw" required>
+  <br>
+  <br>
+  <input type="text" class="reviewsInput" placeholder="Days between tests" id="daysBtwTest" required>
+  <br>
+  <br>
+  <input type="text" class="reviewsInput" placeholder="Memorization level" id="memorizationLevel" required>
+  <br>
+  <br>
+  <input type="text" class="reviewsInput" placeholder="Comments" id="comments" required>
+  <br>
+  <br>
+  <div id="error"></div>
+  <button onclick="test()" class="submit">Submit</button>
+</div>
     <br>
 
     <br>
@@ -171,3 +246,4 @@
     
 
 </script>
+<script src="./assets/js/animations.js"></script>
