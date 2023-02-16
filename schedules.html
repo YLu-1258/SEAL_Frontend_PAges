@@ -9,7 +9,7 @@
     <script src="./assets/js/schedules/swap.js"></script>
     <script>side="class";</script>
   </head>
-  <body class = "elseBody" onload="resize();">
+  <body class = "elseBody" onload="resize();update_display();">
     <!-- Navbar at the top -->
     <img src = "./assets/svg/logo_yellow.svg" id = "navbar0" onclick = "showSidebar();" width = "54.5" height = "54.5" class = "logo" style="top: 32px; left: 17px;">
     <div class = "navbar" id = "navbar1" onclick = "showSidebar();" style = "top: 37px; left: 89px;">MYTOOLKIT</div>
@@ -104,8 +104,8 @@
       }
       function update_display() {
         // prepare fetch options
-        let username = getCookie("username")
-        console.log(username)
+        let id = getCookie("id")
+        console.log(id)
         const read_options = {
           method: 'GET', // *GET, POST, PUT, DELETE, etc.
           mode: 'cors', // no-cors, *cors, same-origin
@@ -128,7 +128,32 @@
             }
             // valid response will have json data
             response.json().then(data => {
-              console.log(data)
+                for (let i = 0; i<data.length; i++) {
+                    if (data[i]["userID"] == id) {
+                        let per1 = data[i]["per1"]
+                        let per2 = data[i]["per2"]
+                        let per3 = data[i]["per3"]
+                        let per4 = data[i]["per4"]
+                        let per5 = data[i]["per5"]
+                        let teach1 = data[i]["teach1"]
+                        let teach2 = data[i]["teach2"]
+                        let teach3 = data[i]["teach3"]
+                        let teach4 = data[i]["teach4"]
+                        let teach5 = data[i]["teach5"]
+                        document.getElementById("class0entry").value = per1;
+                        document.getElementById("class1entry").value = per2;
+                        document.getElementById("class2entry").value = per3;
+                        document.getElementById("class3entry").value = per4;
+                        document.getElementById("class4entry").value = per5;
+                        document.getElementById("teach0entry").value = teach1;
+                        document.getElementById("teach1entry").value = teach2;
+                        document.getElementById("teach2entry").value = teach3;
+                        document.getElementById("teach3entry").value = teach4;
+                        document.getElementById("teach4entry").value = teach5;
+                        let string = "Period 1: " + per1 + " with " + teach1 + "\nPeriod 2: " + per2 + " with " + teach2 + "\nPeriod 3: " + per3 + " with " + teach3 + "\nPeriod 4: " + per4 + " with " + teach4 + "\nPeriod 5: " + per5 + " with " + teach5
+                        console.log(string);
+                    }
+                }
             })
         })
         // catch fetch errors (ie ACCESS to server blocked)
