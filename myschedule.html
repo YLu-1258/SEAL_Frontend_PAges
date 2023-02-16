@@ -57,9 +57,9 @@
     </body>
     <script src="./assets/js/animations.js"></script>
     <script>
-        function compare(a, b) {
-          classesA = getResult[a]["classes"][0];
-          classesB = getResult[b]["classes"][0];
+        function compare(a, b, json) {
+          classesA = json[a]["classes"][0];
+          classesB = json[b]["classes"][0];
           matches = 0
           for (i=1; i<6; i++) {
               clss="per" + i;
@@ -74,8 +74,8 @@
           return matches
         }
         function exactMatches(a, b) {
-          classesA = getResult[a]["classes"][0];
-          classesB = getResult[b]["classes"][0];
+          classesA = json[a]["classes"][0];
+          classesB = json[b]["classes"][0];
           matches = []
           for (i=1; i<6; i++) {
               clss="per" + i;
@@ -131,9 +131,9 @@
             response.json().then(data => {
                 for (let i = 0; i<data.length; i++) {
                     if (i == 0) {
-                      number = compare(id, i)
+                      number = compare(id, i, data)
                       document.getElementById("number").innerHTML = number + " Classes";
-                      sameClasses = exactMatches(id, i)
+                      sameClasses = exactMatches(id, i, data)
                       console.log(sameClasses)
                       for (j = 0; j < 5; j++) {
                         clss = data[i][j]
@@ -147,20 +147,20 @@
                       }
                     } else if (i == 1 || i == 2) {
                         if (i == 1) {
-                            number = compare(id, i)
+                            number = compare(id, i, data)
                             document.getElementById("mid1").innerHTML = string;
                         }
                         if (i == 2) {
-                            number = compare(id, i)
+                            number = compare(id, i, data)
                             document.getElementById("mid2").innerHTML = string;
                         }
                     } else if (i == 3 || i == 4) {
                         if (i == 3) {
-                            number = compare(id, i)
+                            number = compare(id, i, data)
                             document.getElementById("bot1").innerHTML = string;
                         }
                         if (i == 4) {
-                            number = compare(id, i)
+                            number = compare(id, i, data)
                             document.getElementById("bot2").innerHTML = string;
                         }
                     }
