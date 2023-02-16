@@ -50,6 +50,21 @@
     <input class = "scheduleEntryHolderText" type="text" id="teach3entry" style="width:355px;top: 512px; left: 585.5px; z-index: -1;">
     <input class = "scheduleEntryHolderText" type="text" id="teach4entry" style="width:355px;top: 633px; left: 585.5px; z-index: -1;">
     <script>
+      function getCookie(cname) {
+        let name = cname + "=";
+        let decodedCookie = decodeURIComponent(document.cookie);
+        let ca = decodedCookie.split(';');
+        for(let i = 0; i <ca.length; i++) {
+          let c = ca[i];
+          while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+          }
+          if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+          }
+        }
+        return "";
+      }
       function update_display() {
         // prepare fetch options
         let id = getCookie("id")
