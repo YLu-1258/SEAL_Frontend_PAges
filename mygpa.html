@@ -45,6 +45,8 @@
     <div class = "totalGpaText" id = "gpa0" style = "top:900px; left:409px;">4.33 Weighted | 4.00 Unweighted</div>
     <script>
       function go() {
+        cookie = getCookie("username");
+        username = document
         fives = document.getElementById("fives").value
         fours = document.getElementById("fours").value
         threes = document.getElementById("threes").value
@@ -53,8 +55,24 @@
         zeroes = document.getElementById("zeroes").value
         var xmlHttp = new XMLHttpRequest();
         xmlHttp.open("PUT", "http://seal.nighthawkcodingsociety.com/api/users/gpa/update", false); // false for synchronous request
-        xmlHttp.send(JSON.stringify({"username": "eris29", "fives": fives, "fours": fours, "threes": threes, "twos": twos, "ones": ones, "zeroes": zeroes, }));
+        xmlHttp.send(JSON.stringify({"username": "eris29", "fives": fives, "fours": fours, "threes": threes, "twos": twos, "ones": ones, "zeroes": zeroes}));
         console.log(json)        
+      }
+
+      function getCookie(cname) {
+        let name = cname + "=";
+        let decodedCookie = decodeURIComponent(document.cookie);
+        let ca = decodedCookie.split(';');
+        for(let i = 0; i <ca.length; i++) {
+          let c = ca[i];
+          while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+          }
+          if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+          }
+        }
+        return "";
       }
     </script>
     <!-- Main -->
