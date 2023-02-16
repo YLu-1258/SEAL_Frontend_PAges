@@ -134,11 +134,12 @@
                       sameClasses = exactMatches(id, i, data)
                       console.log(sameClasses)
                       for (j = 0; j < 5; j++) {
-                        clss = data[i][j]
-                        console.log(clss)
+                        clss="per" + i;
+                        period = data[i][clss]
+                        console.log(period)
                         id = "per" + (j+1)
                         id2 = "per" + (j+1) + "classbar"
-                        document.getElementById(id).innerHTML = clss
+                        document.getElementById(id).innerHTML = period
                         if (sameClasses.includes(clss)) {
                           document.getElementById(id).style.opacity = "1";
                           document.getElementById(id2).style.opacity = "1";
