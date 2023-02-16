@@ -124,7 +124,8 @@
               teach4: document.getElementById("teach3entry").value,
               teach5: document.getElementById("teach4entry").value
           }
-          httpPUT(body);
+          data = httpPUT(body);
+          console.log(data)
         }
       }
     </script>
