@@ -54,7 +54,7 @@
         ones = document.getElementById("ones").value
         zeroes = document.getElementById("zeroes").value
         var xmlHttp = new XMLHttpRequest();
-        xmlHttp.open("PUT", "http://seal.nighthawkcodingsociety.com/api/users/gpa/update", false); // false for synchronous request
+        xmlHttp.open("PUT", "https://seal.nighthawkcodingsociety.com/api/users/gpa/update", false); // false for synchronous request
         xmlHttp.send(JSON.stringify({"username": "eris29", "fives": fives, "fours": fours, "threes": threes, "twos": twos, "ones": ones, "zeroes": zeroes}));
         console.log(json)        
       }
