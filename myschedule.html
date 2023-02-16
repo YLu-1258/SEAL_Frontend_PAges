@@ -136,14 +136,11 @@
                       for (j = 0; j < 5; j++) {
                         clss="per" + (j+1);
                         period = data[0][clss]
-                        console.log(data)
-                        console.log(data[0])
-                        console.log(clss)
-                        console.log(data[0][clss])
                         id = "per" + (j+1)
                         id2 = "per" + (j+1) + "classbar"
                         document.getElementById(id).innerHTML = period
-                        if (sameClasses.includes(clss)) {
+                        if (sameClasses.includes(period)) {
+                          console.log("true")
                           document.getElementById(id).style.opacity = "1";
                           document.getElementById(id2).style.opacity = "1";
                         }
