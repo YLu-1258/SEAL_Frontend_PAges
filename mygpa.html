@@ -76,6 +76,7 @@
             }
             // response contains valid result
         })
+        update_display()
       }
 
       function read_users() {
@@ -160,6 +161,43 @@
                         document.getElementById("gpa1").innerHTML = string;
                         console.log(string);
                     }
+                }
+            })
+        })
+        // catch fetch errors (ie ACCESS to server blocked)
+        .catch(err => {
+          console.error(err);
+        });
+      }
+    
+      function calculate_Average_Weighted() {
+        const read_options = {
+          method: 'GET', // *GET, POST, PUT, DELETE, etc.
+          mode: 'cors', // no-cors, *cors, same-origin
+          cache: 'default', // *default, no-cache, reload, force-cache, only-if-cached
+          credentials: 'omit', // include, *same-origin, omit
+          headers: {
+            'Content-Type': 'application/json'
+          },
+        };
+
+        // fetch the data from API
+        fetch("https://seal.nighthawkcodingsociety.com/api/users/gpa", read_options)
+          // response is a RESTful "promise" on any successful fetch
+          .then(response => {
+            // check for response errors
+            if (response.status !== 200) {
+                const errorMsg = 'Database read error: ' + response.status;
+                console.log(errorMsg);
+                return;
+            }
+            // valid response will have json data
+            response.json().then(data => {
+              let total = 0
+              let count = 0
+              for (let i = 0; i<data.length; i++) {
+                    count++;
+                    total + data[i]["avg_w_gpa"];
                 }
             })
         })
