@@ -182,8 +182,9 @@
             // valid response will have json data
             response.json().then(data => {
               if (data !== null) {
-                console.log(data)
-                document.cookie = "username="+data; 
+                returned = data.split(":")
+                document.cookie = "username="+returned[0]; 
+                document.cookie = "id="+returned[1]; 
               }
               else {
                 console.log("Invalid credentials");
