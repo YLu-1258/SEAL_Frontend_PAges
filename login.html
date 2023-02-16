@@ -182,6 +182,7 @@
             // valid response will have json data
             response.json().then(data => {
               if (data !== null) {
+                console.log(data)
                 document.cookie = "username="+data; 
               }
               else {
