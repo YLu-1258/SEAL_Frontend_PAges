@@ -73,6 +73,21 @@
           }
           return matches
         }
+        function exactMatches(a, b) {
+          classesA = getResult[a]["classes"][0];
+          classesB = getResult[b]["classes"][0];
+          matches = []
+          for (i=1; i<6; i++) {
+              clss="per" + i;
+              teach = "teach" + i;
+              classA=(classesA[clss] + ":" + classesA[teach])
+              classB=(classesB[clss] + ":" + classesB[teach])
+              if (classA == classB) {
+                  matches.push(classA)
+              }
+          }
+          return matches
+        }
         function getCookie(cname) {
         let name = cname + "=";
         let decodedCookie = decodeURIComponent(document.cookie);
@@ -118,6 +133,8 @@
                     if (i == 0) {
                         number = compare(id, i)
                         document.getElementById("number").innerHTML = number + " Classes";
+                        sameClasses = exactMatches(id, i)
+                        console.log(sameClasses)
                     } else if (i == 1 || i == 2) {
                         if (i == 1) {
                             number = compare(id, i)
