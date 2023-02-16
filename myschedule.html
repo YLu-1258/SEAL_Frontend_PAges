@@ -36,11 +36,11 @@
 
     <div class = "scheduleTextMid" id="number" style="top:173px;left:665px">
         3 Classes
-        <div class = "scheduleTextSmall" id="classmates0" style="text-align: center;top:29px;">AP Calculus</div>
-        <div class = "scheduleTextSmall" id="classmates0" style="text-align: center;top:79px;">AP Biology</div>
-        <div class = "scheduleTextSmall" id="classmates0" style="text-align: center;top:129px;">Honors Humanities</div>
-        <div class = "scheduleTextSmall" id="classmates0" style="text-align: center;top:179px;">AP Chinese</div>
-        <div class = "scheduleTextSmall" id="classmates0" style="text-align: center;top:229px;">AP Comp Sci P</div>
+        <div class = "scheduleTextSmall" id="per1" style="text-align: center;top:29px;">AP Calculus</div>
+        <div class = "scheduleTextSmall" id="per2" style="text-align: center;top:79px;">AP Biology</div>
+        <div class = "scheduleTextSmall" id="per3" style="text-align: center;top:129px;">Honors Humanities</div>
+        <div class = "scheduleTextSmall" id="per4" style="text-align: center;top:179px;">AP Chinese</div>
+        <div class = "scheduleTextSmall" id="per5" style="text-align: center;top:229px;">AP Comp Sci P</div>
     </div>
     <div class = "scheduleCardNumbersMid" id="mid1" style="top:293px; left:410px;opacity:0.5;">2</div>
     <div class = "scheduleCardNumbersMid" id="mid2" style="top:293px; left:1026px;opacity:0.5;">4</div>
@@ -131,10 +131,14 @@
             response.json().then(data => {
                 for (let i = 0; i<data.length; i++) {
                     if (i == 0) {
-                        number = compare(id, i)
-                        document.getElementById("number").innerHTML = number + " Classes";
-                        sameClasses = exactMatches(id, i)
-                        console.log(sameClasses)
+                      for (j = 0; j < 5; j++) {
+                        clss = data[i][j]
+
+                      }
+                      number = compare(id, i)
+                      document.getElementById("number").innerHTML = number + " Classes";
+                      sameClasses = exactMatches(id, i)
+                      console.log(sameClasses)
                     } else if (i == 1 || i == 2) {
                         if (i == 1) {
                             number = compare(id, i)

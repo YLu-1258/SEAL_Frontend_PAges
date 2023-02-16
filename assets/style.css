@@ -153,3 +153,28 @@ input[type="password"] {font-family: OpenSansBold;background: transparent;border
     font-size: 24px;
     z-index: 1;
 }
+.scheduleTextBig {
+    position: absolute;
+    z-index: 1;
+    font-size: 64px;
+}
+.scheduleTextMid {
+    position: absolute;
+    z-index: 1;
+    font-size: 47px;
+}
+.scheduleTextSmall {
+    position: relative;
+    z-index: 1;
+    font-size: 29px;
+}
+.scheduleCardNumbersMid {
+    position: absolute;
+    z-index: 1;
+    font-size: 175px;
+}
+.scheduleCardNumbersBot {
+    position: absolute;
+    z-index: 0;
+    font-size: 130px;
+}
