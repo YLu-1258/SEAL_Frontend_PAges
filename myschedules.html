@@ -34,7 +34,7 @@
     <img src = "./assets/svg/classbar.svg" id = "classmates0" width="343" height="auto" class="scheduleTop" style="top: 527px; left: 597px;">
     <img src = "./assets/svg/classbar.svg" id = "classmates0" width="343" height="auto" class="scheduleTop" style="top: 618px; left: 597px;">
 
-    <div class = "scheduleTextMid" id="classmates0" style="top:173px;left:665px">
+    <div class = "scheduleTextMid" id="number" style="top:173px;left:665px">
         3 Classes
         <div class = "scheduleTextSmall" id="classmates0" style="text-align: center;top:29px;">AP Calculus</div>
         <div class = "scheduleTextSmall" id="classmates0" style="text-align: center;top:79px;">AP Biology</div>
@@ -42,10 +42,10 @@
         <div class = "scheduleTextSmall" id="classmates0" style="text-align: center;top:179px;">AP Chinese</div>
         <div class = "scheduleTextSmall" id="classmates0" style="text-align: center;top:229px;">AP Comp Sci P</div>
     </div>
-    <div class = "scheduleCardNumbersMid" id="classmates0" style="top:293px; left:1026px;opacity:0.5;">4</div>
-    <div class = "scheduleCardNumbersMid" id="classmates0" style="top:293px; left:410px;opacity:0.5;">2</div>
-    <div class = "scheduleCardNumbersBot" id="classmates0" style="top:322px; left:247px;opacity:0.25;">3</div>
-    <div class = "scheduleCardNumbersBot" id="classmates0" style="top:322px; left:1217px;opacity:0.25;">1</div>
+    <div class = "scheduleCardNumbersMid" id="mid1" style="top:293px; left:410px;opacity:0.5;">2</div>
+    <div class = "scheduleCardNumbersMid" id="mid2" style="top:293px; left:1026px;opacity:0.5;">4</div>
+    <div class = "scheduleCardNumbersBot" id="bot1" style="top:322px; left:247px;opacity:0.25;">3</div>
+    <div class = "scheduleCardNumbersBot" id="bot2" style="top:322px; left:1217px;opacity:0.25;">1</div>
     <div class = "scheduleTextBig" id="classmates0" style="top:736px;left:615px">Student 1</div>
 
     <img src = "./assets/svg/schedulecompare_mid.svg" id = "classmates0" width = "356" height = "auto" class = "scheduleMid" style = "top: 210px; left:902px">
@@ -56,5 +56,95 @@
 
     </body>
     <script src="./assets/js/animations.js"></script>
+    <script>
+        function compare(a, b) {
+          classesA = getResult[a]["classes"][0];
+          classesB = getResult[b]["classes"][0];
+          matches = 0
+          for (i=1; i<6; i++) {
+              clss="per" + i;
+              teach = "teach" + i;
+              classA=(classesA[clss] + ":" + classesA[teach])
+              classB=(classesB[clss] + ":" + classesB[teach])
+              if (classA == classB) {
+                  matches += 1
+                  console.log("Match found!" + classA + " = " + classB)
+              }
+          }
+          return matches
+        }
+        function getCookie(cname) {
+        let name = cname + "=";
+        let decodedCookie = decodeURIComponent(document.cookie);
+        let ca = decodedCookie.split(';');
+        for(let i = 0; i <ca.length; i++) {
+          let c = ca[i];
+          while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+          }
+          if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+          }
+        }
+        return "";
+      }
+      function update_display() {
+        // prepare fetch options
+        let id = getCookie("id")
+        console.log(id)
+        const read_options = {
+          method: 'GET', // *GET, POST, PUT, DELETE, etc.
+          mode: 'cors', // no-cors, *cors, same-origin
+          cache: 'default', // *default, no-cache, reload, force-cache, only-if-cached
+          credentials: 'omit', // include, *same-origin, omit
+          headers: {
+            'Content-Type': 'application/json'
+          },
+        };
+
+        // fetch the data from API
+        fetch("https://seal.nighthawkcodingsociety.com/api/users/schedules", read_options)
+          // response is a RESTful "promise" on any successful fetch
+          .then(response => {
+            // check for response errors
+            if (response.status !== 200) {
+                const errorMsg = 'Database read error: ' + response.status;
+                console.log(errorMsg);
+                return;
+            }
+            // valid response will have json data
+            response.json().then(data => {
+                for (let i = 0; i<data.length; i++) {
+                    if (i == 0) {
+                        number = compare(id, i)
+                        document.getElementById("number").innerHTML = number + " Classes";
+                    } else if (i == 1 || i == 2) {
+                        if (i == 1) {
+                            number = compare(id, i)
+                            document.getElementById("mid1").innerHTML = string;
+                        }
+                        if (i == 2) {
+                            number = compare(id, i)
+                            document.getElementById("mid2").innerHTML = string;
+                        }
+                    } else if (i == 3 || i == 4) {
+                        if (i == 3) {
+                            number = compare(id, i)
+                            document.getElementById("bot1").innerHTML = string;
+                        }
+                        if (i == 4) {
+                            number = compare(id, i)
+                            document.getElementById("bot2").innerHTML = string;
+                        }
+                    }
+                }
+            })
+        })
+        // catch fetch errors (ie ACCESS to server blocked)
+        .catch(err => {
+          console.error(err);
+        });
+      }
+      update_display()
     </script>
 </html>
