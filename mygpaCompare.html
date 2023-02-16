@@ -31,11 +31,11 @@
     <img src="./assets/svg/gpa_compare_box.svg" id = "gpa0" width = "440" height = "auto" class = "taskboard" style = "top:373px; left:549px;">
     <img src="./assets/svg/gpa_compare_box.svg" id = "gpa0" width = "440" height = "auto" class = "taskboard" style = "top:478px; left:549px;">
     <img src="./assets/svg/gpa_compare_box.svg" id = "gpa0" width = "440" height = "auto" class = "taskboard" style = "top:583px; left:549px;">
-    <div class = "gpaCompareText" id = "gpa0" style = "top:178px; left:615px">Average GPA: 3.98</div>
-    <div class = "gpaCompareText" id = "gpa0" style = "top:283px; left:603px">Average UGPA: 3.72</div>
-    <div class = "gpaCompareText" id = "gpa0" style = "top:388px; left:624px">Lowest GPA: 2.50</div>
-    <div class = "gpaCompareText" id = "gpa0" style = "top:493px; left:619px">Highest GPA: 4.48</div>
-    <div class = "gpaCompareText" id = "gpa0" style = "top:598px; left:589px">Your Position: 16/403</div>
+    <div class = "gpaCompareText" id = "gpa1" style = "top:178px; left:615px">Average GPA: 3.98</div>
+    <div class = "gpaCompareText" id = "gpa2" style = "top:283px; left:603px">Average UGPA: 3.72</div>
+    <div class = "gpaCompareText" id = "gpa3" style = "top:388px; left:624px">Lowest GPA: 2.50</div>
+    <div class = "gpaCompareText" id = "gpa4" style = "top:493px; left:619px">Highest GPA: 4.48</div>
+    <div class = "gpaCompareText" id = "gpa5" style = "top:598px; left:589px">Your Position: 16/403</div>
 
     <div class = "totalGpaText" id = "gpa0" style = "top:745px; left:364px;">You are in the top 4% of students!</div>
     <!-- Main -->
@@ -43,4 +43,230 @@
     </body>
     <script></script>
     <script src="./assets/js/animations.js"></script>
+
+    <script>
+      var UW;
+      function getCookie(cname) {
+        let name = cname + "=";
+        let decodedCookie = decodeURIComponent(document.cookie);
+        let ca = decodedCookie.split(';');
+        for(let i = 0; i <ca.length; i++) {
+          let c = ca[i];
+          while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+          }
+          if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+          }
+        }
+        return "";
+      }
+    
+      function calculate_Average_Weighted() {
+        const read_options = {
+          method: 'GET', // *GET, POST, PUT, DELETE, etc.
+          mode: 'cors', // no-cors, *cors, same-origin
+          cache: 'default', // *default, no-cache, reload, force-cache, only-if-cached
+          credentials: 'omit', // include, *same-origin, omit
+          headers: {
+            'Content-Type': 'application/json'
+          },
+        };
+
+        // fetch the data from API
+        fetch("https://seal.nighthawkcodingsociety.com/api/users/gpa", read_options)
+          // response is a RESTful "promise" on any successful fetch
+          .then(response => {
+            // check for response errors
+            if (response.status !== 200) {
+                const errorMsg = 'Database read error: ' + response.status;
+                console.log(errorMsg);
+                return;
+            }
+            // valid response will have json data
+            response.json().then(data => {
+              let total = 0;
+              let count = 0;
+              for (let i = 0; i<data.length; i++) {
+                    count++;
+                    total = total + data[i]["avg_w_gpa"];
+              }
+              let average_w = total/count;
+              console.log(average_w);
+              document.getElementById("gpa1").innerHTML = "Average GPA: " + average_w.toString();
+            })
+        })
+        // catch fetch errors (ie ACCESS to server blocked)
+        .catch(err => {
+          console.error(err);
+        });
+      }
+
+      function calculate_Average_Unweighted() {
+        const read_options = {
+          method: 'GET', // *GET, POST, PUT, DELETE, etc.
+          mode: 'cors', // no-cors, *cors, same-origin
+          cache: 'default', // *default, no-cache, reload, force-cache, only-if-cached
+          credentials: 'omit', // include, *same-origin, omit
+          headers: {
+            'Content-Type': 'application/json'
+          },
+        };
+
+        // fetch the data from API
+        fetch("https://seal.nighthawkcodingsociety.com/api/users/gpa", read_options)
+          // response is a RESTful "promise" on any successful fetch
+          .then(response => {
+            // check for response errors
+            if (response.status !== 200) {
+                const errorMsg = 'Database read error: ' + response.status;
+                console.log(errorMsg);
+                return;
+            }
+            // valid response will have json data
+            response.json().then(data => {
+              let total = 0;
+              let count = 0;
+              for (let i = 0; i<data.length; i++) {
+                    count++;
+                    total = total + data[i]["avg_uw_gpa"];
+              }
+              let average_uw = total/count;
+              console.log(average_uw);
+              document.getElementById("gpa2").innerHTML = "Average UGPA: " + average_uw.toString();
+            })
+        })
+        // catch fetch errors (ie ACCESS to server blocked)
+        .catch(err => {
+          console.error(err);
+        });
+      }
+
+      function get_user_position(){
+        function swap(items, leftIndex, rightIndex){
+            var temp = items[leftIndex];
+            items[leftIndex] = items[rightIndex];
+            items[rightIndex] = temp;
+        }
+        function partition(items, left, right) {
+            var pivot   = items[Math.floor((right + left) / 2)],
+                i       = left,
+                j       = right;
+            while (i <= j) {
+                while (items[i] < pivot) {
+                    i++;
+                }
+                while (items[j] > pivot) {
+                    j--;
+                }
+                if (i <= j) {
+                    swap(items, i, j);
+                    i++;
+                    j--;
+                }
+            }
+            return i;
+        }
+
+        function quickSort(items, left, right) {
+            var index;
+            if (items.length > 1) {
+                index = partition(items, left, right);
+                if (left < index - 1) { 
+                    quickSort(items, left, index - 1);
+                }
+                if (index < right) { 
+                    quickSort(items, index, right);
+                }
+            }
+            return items;
+        }
+        const read_options = {
+          method: 'GET', // *GET, POST, PUT, DELETE, etc.
+          mode: 'cors', // no-cors, *cors, same-origin
+          cache: 'default', // *default, no-cache, reload, force-cache, only-if-cached
+          credentials: 'omit', // include, *same-origin, omit
+          headers: {
+            'Content-Type': 'application/json'
+          },
+        };
+
+        // fetch the data from API
+        fetch("https://seal.nighthawkcodingsociety.com/api/users/gpa", read_options)
+          // response is a RESTful "promise" on any successful fetch
+          .then(response => {
+            // check for response errors
+            if (response.status !== 200) {
+                const errorMsg = 'Database read error: ' + response.status;
+                console.log(errorMsg);
+                return;
+            }
+            // valid response will have json data
+            response.json().then(data => {
+              const gpas = [];
+              let total = 0;
+              for (let i = 0; i<data.length; i++) {
+                    gpas.push(data[i]["avg_w_gpa"]);
+                    total++
+              }
+              let gpas_sorted = quickSort(gpas, 0, gpas.length - 1);
+              get_gpa_of_user();
+              let unique = [...new Set(gpas_sorted)];
+              for (let i = 0; i < unique.length; i++){
+                if (unique[i] == res) {
+                  let user_pos = unique.length-i;
+                  let percentage = (unique.length-i)/total;
+                  document.getElementById("gpa3").innerHTML = "Lowest GPA: " + unique[0];
+                  document.getElementById("gpa4").innerHTML = "Highest GPA: " + unique.at(-1);
+                  document.getElementById("gpa5").innerHTML = "Your Position: " + user_pos.toString() + "/" + total.toString();
+                }
+              }
+            })
+        })
+        // catch fetch errors (ie ACCESS to server blocked)
+        .catch(err => {
+          console.error(err);
+        });
+      }
+    
+      function get_gpa_of_user() {
+        // prepare fetch options
+        let username = getCookie("username")
+        console.log(username)
+        const read_options = {
+          method: 'GET', // *GET, POST, PUT, DELETE, etc.
+          mode: 'cors', // no-cors, *cors, same-origin
+          cache: 'default', // *default, no-cache, reload, force-cache, only-if-cached
+          credentials: 'omit', // include, *same-origin, omit
+          headers: {
+            'Content-Type': 'application/json'
+          },
+        };
+
+        // fetch the data from API
+        fetch("https://seal.nighthawkcodingsociety.com/api/users/gpa", read_options)
+          // response is a RESTful "promise" on any successful fetch
+          .then(response => {
+            // check for response errors
+            if (response.status !== 200) {
+                const errorMsg = 'Database read error: ' + response.status;
+                console.log(errorMsg);
+                return;
+            }
+            // valid response will have json data
+            response.json().then(data => {
+                for (let i = 0; i<data.length; i++) {
+                    if (data[i]["username"] == username) {
+                        globalThis.res = parseFloat(data[i]["avg_w_gpa"]);
+                    }
+                }
+            })
+        })
+        // catch fetch errors (ie ACCESS to server blocked)
+        .catch(err => {
+          console.error(err);
+        });
+      }
+      
+    </script>
 </html>
