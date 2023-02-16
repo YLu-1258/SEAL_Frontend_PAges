@@ -14,7 +14,7 @@
     <img src = "./assets/svg/logo_yellow.svg" id = "navbar0" onclick = "showSidebar();" width = "54.5" height = "54.5" class = "logo" style="top: 32px; left: 17px;">
     <div class = "navbar" id = "navbar1" onclick = "showSidebar();" style = "top: 37px; left: 89px;">MYTOOLKIT</div>
     <div class = "navbar" id = "navbar2" style = "top: 37px; left: 1168px;opacity: 1;" onclick="window.location = './schedules.html'">SCHEDULE</div>
-    <div class = "navbar" id = "navbar2" style = "top: 37px; left: 944px;opacity: 0.25;" onclick="window.location = './myschedules.html'">CLASSMATES</div>
+    <div class = "navbar" id = "navbar2" style = "top: 37px; left: 944px;opacity: 0.25;" onclick="window.location = './myschedule.html'">CLASSMATES</div>
     <div class = "navbar" id = "navbar3" style = "top: 37px; left: 1360px;" onclick="window.location = './login.html';">LOGIN</div>
     <!-- Navbar at the top -->
 
@@ -134,7 +134,7 @@
                       sameClasses = exactMatches(id, i, data)
                       console.log(sameClasses)
                       for (j = 0; j < 5; j++) {
-                        clss="per" + j+1;
+                        clss="per" + (j+1);
                         period = data[0][clss]
                         console.log(data)
                         console.log(data[0])
