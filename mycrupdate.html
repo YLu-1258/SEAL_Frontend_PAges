@@ -23,6 +23,10 @@
     <button onclick="test()">Submit</button>
     <br>
 
+    <br>
+
+    <div id="updateInfo"></div>
+
 
 <script>
    function test(){
@@ -60,7 +64,8 @@
           //update_display()
           console.log("hi");
       })
-      //update_display()
+      
+      update_display();
   }
 
       function getCookie(cname) {
@@ -83,14 +88,13 @@
 
        
 
-
       function update_display() {
         // prepare fetch options
         let username = getCookie("username")
         console.log(username)
         const read_options = {
           method: 'GET', // *GET, POST, PUT, DELETE, etc.
-          mode: 'cors', // no-cors, *cors, same-origin
+          //mode: 'cors', // no-cors, *cors, same-origin
           cache: 'default', // *default, no-cache, reload, force-cache, only-if-cached
           credentials: 'omit', // include, *same-origin, omit
           headers: {
@@ -101,7 +105,7 @@
 
 
         // fetch the data from API
-        fetch("https://seal.nighthawkcodingsociety.com/api/users/classReview", read_options)
+        fetch("https://seal.nighthawkcodingsociety.com/api/users/classreview", read_options)
           // response is a RESTful "promise" on any successful fetch
           .then(response => {
             // check for response errors
@@ -113,12 +117,53 @@
             // valid response will have json data
             response.json().then(data => {
                 console.log(data);
+
+                var className = data[0].className;
+                var comments = data[0].comments;
+                var daysBtwTest = data[0].daysBtwTest;
+                var difficulty = data[0].difficulty;
+                var className = data[0].className;
+                var hoursOfHw = data[0].hoursOfHw;
+                var memorizationLevel = data[0].memorizationLevel;
+                var user_id = data[0].user_id;
+
+                
+                let p = document.createElement("p");
+                p.appendChild(document.createTextNode("Review successfully updated!")); 
+                document.getElementById("updateInfo").appendChild(p);
+                p = document.createElement("p");
+                p.appendChild(document.createTextNode("Class name: " + className)); 
+                document.getElementById("updateInfo").appendChild(p);
+                p = document.createElement("p");
+                p.appendChild(document.createTextNode("Comments: " + comments)); 
+                document.getElementById("updateInfo").appendChild(p);
+                p = document.createElement("p");
+                p.appendChild(document.createTextNode("Days between tests: " + daysBtwTest)); 
+                document.getElementById("updateInfo").appendChild(p);
+                p = document.createElement("p");
+                p.appendChild(document.createTextNode("Difficulty: " + difficulty)); 
+                document.getElementById("updateInfo").appendChild(p);
+                p = document.createElement("p");
+                p.appendChild(document.createTextNode("Class name: " + className)); 
+                document.getElementById("updateInfo").appendChild(p);
+                p = document.createElement("p");
+                p.appendChild(document.createTextNode("Hours of homework: " + hoursOfHw)); 
+                document.getElementById("updateInfo").appendChild(p);
+                p = document.createElement("p");
+                p.appendChild(document.createTextNode("Memorization Level: " + memorizationLevel)); 
+                document.getElementById("updateInfo").appendChild(p);
+                p = document.createElement("p");
+                p.appendChild(document.createTextNode("User id: " + user_id)); 
+                document.getElementById("updateInfo").appendChild(p);
+
+
             })
         })
         // catch fetch errors (ie ACCESS to server blocked)
         .catch(err => {
           console.error(err);
         });
+      
       }
       
     
