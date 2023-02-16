@@ -28,19 +28,19 @@
 
     <!-- Main -->
     <img src = "./assets/svg/schedulecompare_main.svg" id = "classmates0" width = "445" height = "auto" class = "scheduleTop" style = "top: 154px; left:548px">
-    <img src = "./assets/svg/classbar.svg" id = "classmates0" width="343" height="auto" class="scheduleTop" style="top: 254px; left: 597px;">
-    <img src = "./assets/svg/classbar.svg" id = "classmates0" width="343" height="auto" class="scheduleTop" style="top: 345px; left: 597px;">
-    <img src = "./assets/svg/classbar.svg" id = "classmates0" width="343" height="auto" class="scheduleTop" style="top: 436px; left: 597px;">
-    <img src = "./assets/svg/classbar.svg" id = "classmates0" width="343" height="auto" class="scheduleTop" style="top: 527px; left: 597px;">
-    <img src = "./assets/svg/classbar.svg" id = "classmates0" width="343" height="auto" class="scheduleTop" style="top: 618px; left: 597px;">
+    <img src = "./assets/svg/classbar.svg" id = "per1classbar" width="343" height="auto" class="scheduleTop" style="top: 254px; left: 597px;opacity:0.25;">
+    <img src = "./assets/svg/classbar.svg" id = "per2classbar" width="343" height="auto" class="scheduleTop" style="top: 345px; left: 597px;opacity:0.25;">
+    <img src = "./assets/svg/classbar.svg" id = "per3classbar" width="343" height="auto" class="scheduleTop" style="top: 436px; left: 597px;opacity:0.25;">
+    <img src = "./assets/svg/classbar.svg" id = "per4classbar" width="343" height="auto" class="scheduleTop" style="top: 527px; left: 597px;opacity:0.25;">
+    <img src = "./assets/svg/classbar.svg" id = "per5classbar" width="343" height="auto" class="scheduleTop" style="top: 618px; left: 597px;opacity:0.25;">
 
     <div class = "scheduleTextMid" id="number" style="top:173px;left:665px">
         3 Classes
-        <div class = "scheduleTextSmall" id="per1" style="text-align: center;top:29px;">AP Calculus</div>
-        <div class = "scheduleTextSmall" id="per2" style="text-align: center;top:79px;">AP Biology</div>
-        <div class = "scheduleTextSmall" id="per3" style="text-align: center;top:129px;">Honors Humanities</div>
-        <div class = "scheduleTextSmall" id="per4" style="text-align: center;top:179px;">AP Chinese</div>
-        <div class = "scheduleTextSmall" id="per5" style="text-align: center;top:229px;">AP Comp Sci P</div>
+        <div class = "scheduleTextSmall" id="per1" style="text-align: center;top:29px;opacity:0.25;">AP Calculus</div>
+        <div class = "scheduleTextSmall" id="per2" style="text-align: center;top:79px;opacity:0.25;">AP Biology</div>
+        <div class = "scheduleTextSmall" id="per3" style="text-align: center;top:129px;opacity:0.25;">Honors Humanities</div>
+        <div class = "scheduleTextSmall" id="per4" style="text-align: center;top:179px;opacity:0.25;">AP Chinese</div>
+        <div class = "scheduleTextSmall" id="per5" style="text-align: center;top:229px;opacity:0.25;">AP Comp Sci P</div>
     </div>
     <div class = "scheduleCardNumbersMid" id="mid1" style="top:293px; left:410px;opacity:0.5;">2</div>
     <div class = "scheduleCardNumbersMid" id="mid2" style="top:293px; left:1026px;opacity:0.5;">4</div>
@@ -131,14 +131,18 @@
             response.json().then(data => {
                 for (let i = 0; i<data.length; i++) {
                     if (i == 0) {
-                      for (j = 0; j < 5; j++) {
-                        clss = data[i][j]
-
-                      }
                       number = compare(id, i)
                       document.getElementById("number").innerHTML = number + " Classes";
                       sameClasses = exactMatches(id, i)
                       console.log(sameClasses)
+                      for (j = 0; j < 5; j++) {
+                        clss = data[i][j]
+                        id = "per" + (j+1)
+                        if (sameClasses.includes(clss)) {
+                          document.getElementById(id).style.opacity = "1";
+                        }
+                        document.getElementById(id).innerHTML = clss
+                      }
                     } else if (i == 1 || i == 2) {
                         if (i == 1) {
                             number = compare(id, i)

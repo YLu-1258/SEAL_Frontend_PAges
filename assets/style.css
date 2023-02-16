@@ -145,7 +145,7 @@ input[type="password"] {font-family: OpenSansBold;background: transparent;border
 }
 .scheduleBot {
     position: absolute;
-    z-index: 0;
+    z-index: -1;
 }
 .scheduleEntryHolderText {
     color: rgb(83, 84, 84);
