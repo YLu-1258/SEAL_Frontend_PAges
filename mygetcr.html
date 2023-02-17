@@ -42,9 +42,28 @@
         border-radius: 5em;
       }
 
+      .tablelines table, .tablelines td, .tablelines th {
+        border: 1px solid black;
+        }
+
 
 </style>
-<div id="getReview" class="main"></div>
+<div id="getReview" class="main">
+    <table class="tablelines">
+        <tr>
+          <th>Class Name</th>
+          <th>Days Between Tests</th>
+          <th>Difficulty</th>
+          <th>Hours of Homework</th>
+          <th>Memorization Level</th>
+          <th>Comments</th>
+        </tr>
+        <tbody id="reviews">
+
+        </tbody>
+       
+      </table> 
+</div>
 
 
 <script>
@@ -53,6 +72,46 @@
             // trap error response from Web API
             response.json().then(data => {
                 console.log(data);
+
+                for (const row of data) {
+                    // make "tr element" for each "row of data"
+                    const tr = document.createElement("tr");
+                    
+                    // td for joke cell
+                    const className = document.createElement("td");
+                    className.innerHTML = row.className;  // add fetched data to innerHTML
+        
+                    // td for haha cell with onclick actions
+                    const daysBtwTest= document.createElement("td");
+                    daysBtwTest.innerHTML = row.daysBtwTest; 
+        
+                    // td for boohoo cell with onclick actions
+                    const difficulty= document.createElement("td");
+                    difficulty.innerHTML = row.difficulty; 
+
+                    const hoursOfHw= document.createElement("td");
+                    hoursOfHw.innerHTML = row.hoursOfHw; 
+
+                    const memorizationLevel = document.createElement("td");
+                    memorizationLevel.innerHTML = row.memorizationLevel; 
+
+                    const comments = document.createElement("td");
+                    comments.innerHTML = row.comments; 
+                     
+                    // this builds ALL td's (cells) into tr (row) element
+                    tr.appendChild(className);
+                    tr.appendChild(daysBtwTest);
+                    tr.appendChild(difficulty);
+                    tr.appendChild(hoursOfHw);
+                    tr.appendChild(memorizationLevel);
+                    tr.appendChild(comments);
+        
+                    // this adds all the tr (row) work above to the HTML "result" container
+                    document.getElementById("reviews").appendChild(tr);
+                  }
+
+
+
                 
                 var p = document.createElement("p");
                 let br = document.createElement("br");
@@ -69,6 +128,7 @@
                 document.getElementById("getReview").appendChild(p);
                 */
 
+                /*
                 for (let i = 0; i < data.length; i++) {
                 
                     p = document.createElement("p");
@@ -104,6 +164,7 @@
             
 
                 }
+                */
                 
             })
             }
