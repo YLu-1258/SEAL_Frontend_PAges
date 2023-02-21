@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -11,10 +12,9 @@
     <!-- Navbar at the top -->
     <img src = "./assets/svg/logo_yellow.svg" id = "navbar0" onclick = "showSidebar();" width = "54.5" height = "54.5" class = "logo" style="top: 32px; left: 17px;">
     <div class = "navbar" id = "navbar1" onclick = "showSidebar();" style = "top: 37px; left: 89px;">MYTOOLKIT</div>
-    <div class = "navbar" id = "navbar2" style = "top: 37px; left: 800px;opacity: 0.25;" onclick="window.location = './mycrupdate.html'">EDIT REVIEWS</div>
-    <div class = "navbar" id = "navbar2" style = "top: 37px; left: 500px;" onclick="window.location = './mygetcr.html'">CLASS REVIEWS</div>
+    <div class = "navbar" id = "navbar2" style = "top: 37px; left: 1050px;" onclick="window.location = './mymakecr.html'">EDIT</div>
+    <div class = "navbar" id = "navbar2" style = "top: 37px; left: 775px;opacity: 0.25;" onclick="window.location = './mygetcr.html'">CLASS REVIEWS</div>
     <div class = "navbar" id = "navbar3" style = "top: 37px; left: 1360px;" onclick="window.location = './login.html';">LOGIN</div>
-    <div class = "navbar" id = "navbar3" style = "top: 37px; left: 1100px;" onclick="window.location = './mymakecr.html';">CREATE REVIEWS</div>
     <!-- Navbar at the top -->
 
     <!-- Sidebar -->
@@ -24,4 +24,261 @@
     <div class = "sidebarClickables" id = "sidebar3" style = "top: 257px; left: 89px;opacity: 0;" onclick="window.location = './mygetcr.html'">MYREVIEWS</div>
     <div class = "sidebarClickables" id = "sidebar4" style = "top: 337px; left: 89px;opacity: 0;" onclick="window.location = './myday.html';">MYDAY</div>
     <!-- Sidebar -->
+
   </body>
+<style>
+
+  body {
+    display: grid;
+    height: 200vh;
+  }
+  
+  .main {
+
+    place-self: center !important;
+    background-color: rgba(255, 196, 0, 0.75);
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 50px;
+    padding-bottom: 75px;
+    border-radius: 5em;
+  }
+
+  .reviewsInput {
+    background-color: rgba(255, 244, 93, 0.75) !important;
+    padding-left: 2em;
+    padding-right: 2em;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    width: 400px;
+    border-radius: 20px;
+  }
+
+  .submit{
+    padding-left: 5em;
+    padding-right: 5em;
+    padding-top: 1em;
+    padding-bottom: 1em;'
+    margin-top: 6em;
+    position: relative !important;
+    left: 30%;
+    background-color: rgba(255, 196, 0, 0.75) !important;
+    border: none;
+    border-radius:20px;
+    color: rgb(83,83,83);
+    font-weight: bold;
+    
+
+  }
+
+  .toggle{
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    /*
+    margin-top: -700px;
+    margin-left: 400px;
+    */
+    margin-top: inherit;
+    margin-left: inherit;
+    left: 30%;
+    background-color: rgba(255, 196, 0, 0.75) !important;
+    border: none;
+    border-radius:20px;
+    color: rgb(83,83,83);
+    font-weight: bold;
+    width: 100px; 
+    height: 50px
+    
+
+  }
+</style>
+
+<h1 style="margin-top: 200px; text-align: center">Submit reviews</h1>
+<div class="main" style="margin-top: -350px" id="clubs0">
+  <input type="text" class="reviewsInput" placeholder="Class Name" id="className" required>
+  <br>
+  <br>
+  <input type="text" class="reviewsInput" placeholder="Difficulty" id="difficulty" required>
+  <br>
+  <br>
+  <input type="text" class="reviewsInput" placeholder="Hours of homework per day" id="hoursOfHw" required>
+  <br>
+  <br>
+  <input type="text" class="reviewsInput" placeholder="Days between tests" id="daysBtwTest" required>
+  <br>
+  <br>
+  <input type="text" class="reviewsInput" placeholder="Memorization level" id="memorizationLevel" required>
+  <br>
+  <br>
+  <input type="text" class="reviewsInput" placeholder="Comments" id="comments" required>
+  <br>
+  <br>
+  <div id="error"></div>
+  <button onclick="test()" class="submit">Submit</button>
+</div>
+
+<button style="margin-top: -650px; margin-left: 400px" class="toggle" onclick="create()">Submit review</button>
+<button style="margin-top: -800px; margin-left: 400px" class="toggle" onclick="update()">Edit review</button>
+
+    <br>
+
+    <br>
+
+    <div id="updateInfo"></div>
+
+
+<script>
+
+  function create() {
+    window.location.href = "/mymakecr.html"
+  }
+
+  function update() {
+    window.location.href = "/mycrupdate.html"
+  }
+
+   function test(){
+    console.log(getCookie("username"));
+      //Validate Password (must be 6-20 characters in len)
+      //verifyPassword("click");
+      const body = {
+          username: getCookie("username"),
+          className: document.getElementById("className").value,
+          difficulty: document.getElementById("difficulty").value,
+          hoursOfHw: document.getElementById("hoursOfHw").value,
+          daysBtwTest: document.getElementById("daysBtwTest").value,
+          memorizationLevel: document.getElementById("memorizationLevel").value,
+          comments: document.getElementById("comments").value
+      };
+      const requestOptions = {
+          method: 'POST',
+          body: JSON.stringify(body),
+          headers: {
+              "content-type": "application/json",
+              'Authorization': 'Bearer my-token',
+          },
+      };
+
+      // URL for Create API
+      // Fetch API call to the database to create a new user
+      fetch("https://seal.nighthawkcodingsociety.com/api/users/updateclassreview", requestOptions)
+        .then(response => {
+          // trap error response from Web API
+          if (response.status !== 200) {
+            const errorMsg = 'Database create error: ' + response.status;
+            console.log(errorMsg);
+          }
+          // response contains valid result
+          //update_display()
+          console.log("hi");
+      })
+      
+      update_display();
+  }
+
+      function getCookie(cname) {
+        let name = cname + "=";
+        let decodedCookie = decodeURIComponent(document.cookie);
+        let ca = decodedCookie.split(';');
+        for(let i = 0; i <ca.length; i++) {
+          let c = ca[i];
+          while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+          }
+          if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+          }
+        }
+        return "";
+      }
+
+
+
+       
+
+      function update_display() {
+        // prepare fetch options
+        let username = getCookie("username")
+        console.log(username)
+        const read_options = {
+          method: 'GET', // *GET, POST, PUT, DELETE, etc.
+          //mode: 'cors', // no-cors, *cors, same-origin
+          cache: 'default', // *default, no-cache, reload, force-cache, only-if-cached
+          credentials: 'omit', // include, *same-origin, omit
+          headers: {
+            'Content-Type': 'application/json'
+          },
+        };
+
+
+
+        // fetch the data from API
+        fetch("https://seal.nighthawkcodingsociety.com/api/users/classreview", read_options)
+          // response is a RESTful "promise" on any successful fetch
+          .then(response => {
+            // check for response errors
+            if (response.status !== 200) {
+                const errorMsg = 'Database read error: ' + response.status;
+                console.log(errorMsg);
+                return;
+            }
+            // valid response will have json data
+            response.json().then(data => {
+                console.log(data);
+
+                var className = data[0].className;
+                var comments = data[0].comments;
+                var daysBtwTest = data[0].daysBtwTest;
+                var difficulty = data[0].difficulty;
+                var className = data[0].className;
+                var hoursOfHw = data[0].hoursOfHw;
+                var memorizationLevel = data[0].memorizationLevel;
+                var user_id = data[0].user_id;
+
+                
+                let p = document.createElement("p");
+                p.appendChild(document.createTextNode("Review successfully updated!")); 
+                document.getElementById("updateInfo").appendChild(p);
+                p = document.createElement("p");
+                p.appendChild(document.createTextNode("Class name: " + className)); 
+                document.getElementById("updateInfo").appendChild(p);
+                p = document.createElement("p");
+                p.appendChild(document.createTextNode("Comments: " + comments)); 
+                document.getElementById("updateInfo").appendChild(p);
+                p = document.createElement("p");
+                p.appendChild(document.createTextNode("Days between tests: " + daysBtwTest)); 
+                document.getElementById("updateInfo").appendChild(p);
+                p = document.createElement("p");
+                p.appendChild(document.createTextNode("Difficulty: " + difficulty)); 
+                document.getElementById("updateInfo").appendChild(p);
+                p = document.createElement("p");
+                p.appendChild(document.createTextNode("Class name: " + className)); 
+                document.getElementById("updateInfo").appendChild(p);
+                p = document.createElement("p");
+                p.appendChild(document.createTextNode("Hours of homework: " + hoursOfHw)); 
+                document.getElementById("updateInfo").appendChild(p);
+                p = document.createElement("p");
+                p.appendChild(document.createTextNode("Memorization Level: " + memorizationLevel)); 
+                document.getElementById("updateInfo").appendChild(p);
+                p = document.createElement("p");
+                p.appendChild(document.createTextNode("User id: " + user_id)); 
+                document.getElementById("updateInfo").appendChild(p);
+
+
+            })
+        })
+        // catch fetch errors (ie ACCESS to server blocked)
+        .catch(err => {
+          console.error(err);
+        });
+      
+      }
+      
+    
+     
+    
+
+</script>
+<script src="./assets/js/animations.js"></script>

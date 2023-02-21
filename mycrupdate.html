@@ -12,7 +12,7 @@
     <!-- Navbar at the top -->
     <img src = "./assets/svg/logo_yellow.svg" id = "navbar0" onclick = "showSidebar();" width = "54.5" height = "54.5" class = "logo" style="top: 32px; left: 17px;">
     <div class = "navbar" id = "navbar1" onclick = "showSidebar();" style = "top: 37px; left: 89px;">MYTOOLKIT</div>
-    <div class = "navbar" id = "navbar2" style = "top: 37px; left: 1050px;" onclick="window.location = './mycrupdate.html'">EDIT REVIEWS</div>
+    <div class = "navbar" id = "navbar2" style = "top: 37px; left: 1050px;" onclick="window.location = './mymakecr.html'">EDIT</div>
     <div class = "navbar" id = "navbar2" style = "top: 37px; left: 775px;opacity: 0.25;" onclick="window.location = './mygetcr.html'">CLASS REVIEWS</div>
     <div class = "navbar" id = "navbar3" style = "top: 37px; left: 1360px;" onclick="window.location = './login.html';">LOGIN</div>
     <!-- Navbar at the top -->
@@ -70,10 +70,33 @@
     
 
   }
+
+  .toggle{
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    /*
+    margin-top: -700px;
+    margin-left: 400px;
+    */
+    margin-top: inherit;
+    margin-left: inherit;
+    left: 30%;
+    background-color: rgba(255, 196, 0, 0.75) !important;
+    border: none;
+    border-radius:20px;
+    color: rgb(83,83,83);
+    font-weight: bold;
+    width: 100px; 
+    height: 50px
+    
+
+  }
 </style>
 
 <h1 style="margin-top: 200px; text-align: center">Edit reviews</h1>
-<div class="main" style="margin-top: -700px" id="clubs0">
+<div class="main" style="margin-top: -350px" id="clubs0">
   <input type="text" class="reviewsInput" placeholder="Class Name" id="className" required>
   <br>
   <br>
@@ -93,8 +116,12 @@
   <br>
   <br>
   <div id="error"></div>
-  <button onclick="test()" class="submit">Submit</button>
+  <button onclick="test()" class="submit">Edit</button>
 </div>
+
+<button style="margin-top: -650px; margin-left: 400px" class="toggle" onclick="create()">Submit review</button>
+<button style="margin-top: -800px; margin-left: 400px" class="toggle" onclick="update()">Edit review</button>
+
     <br>
 
     <br>
@@ -103,6 +130,15 @@
 
 
 <script>
+
+  function create() {
+    window.location.href = "/mymakecr.html"
+  }
+
+  function update() {
+    window.location.href = "/mycrupdate.html"
+  }
+
    function test(){
     console.log(getCookie("username"));
       //Validate Password (must be 6-20 characters in len)
