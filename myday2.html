@@ -61,6 +61,63 @@
                     }
                 }
         }
+        function getCookie(cname) {
+        let name = cname + "=";
+        let decodedCookie = decodeURIComponent(document.cookie);
+        let ca = decodedCookie.split(';');
+        for(let i = 0; i <ca.length; i++) {
+          let c = ca[i];
+          while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+          }
+          if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+          }
+        }
+        return "";
+      }
+        function update_display() {
+        // prepare fetch options
+        let id = getCookie("id")
+        console.log(id)
+        const read_options = {
+          method: 'GET', // *GET, POST, PUT, DELETE, etc.
+          mode: 'cors', // no-cors, *cors, same-origin
+          cache: 'default', // *default, no-cache, reload, force-cache, only-if-cached
+          credentials: 'omit', // include, *same-origin, omit
+          headers: {
+            'Content-Type': 'application/json'
+          },
+        };
+
+        // fetch the data from API
+        fetch("https://seal.nighthawkcodingsociety.com/api/users/time", read_options)
+          // response is a RESTful "promise" on any successful fetch
+          .then(response => {
+            // check for response errors
+            if (response.status !== 200) {
+                const errorMsg = 'Database read error: ' + response.status;
+                console.log(errorMsg);
+                return;
+            }
+            // valid response will have json data
+            response.json().then(data => {
+                for (let i = 0; i<data.length; i++) {
+                    if (i == id) {
+                        for (let j=0; j<data[i]["tasks"].length; j++) {
+                            console.log(data[i]["tasks"][j] + " takes " + data[i]["times"][j] + " minutes")
+                            push2(data[i]["tasks"][j], data[i]["times"][j])
+                    }
+                    }
+                }
+            })
+        })
+        // catch fetch errors (ie ACCESS to server blocked)
+        .catch(err => {
+          console.error(err);
+        });
+      }
+      update_display()
     </script>
     <script src="./assets/js/calculateSleepTime.js"></script>
 </head>
@@ -72,7 +129,6 @@
             <button id="push" onclick="push();">Add</button>
         </div>
         <div id="tasks"></div>
-        <h3>Estimated sleep time: </h3>
     </div>
 </body>
 </html>
