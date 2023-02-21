@@ -132,11 +132,11 @@
 <script>
 
   function create() {
-    window.location.href = "/mymakecr.html"
+    window.location.href = "./mymakecr.html"
   }
 
   function update() {
-    window.location.href = "/mycrupdate.html"
+    window.location.href = "./mycrupdate.html"
   }
 
    function test(){
@@ -163,7 +163,7 @@
 
       // URL for Create API
       // Fetch API call to the database to create a new user
-      fetch("https://seal.nighthawkcodingsociety.com/api/users/updateclassreview", requestOptions)
+      fetch("https://seal.nighthawkcodingsociety.com/api/users/createclassreview", requestOptions)
         .then(response => {
           // trap error response from Web API
           if (response.status !== 200) {
