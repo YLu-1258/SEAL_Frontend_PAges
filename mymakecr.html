@@ -95,7 +95,7 @@
   }
 </style>
 
-<h1 style="margin-top: 200px; text-align: center">Edit reviews</h1>
+<h1 style="margin-top: 200px; text-align: center">Submit reviews</h1>
 <div class="main" style="margin-top: -350px" id="clubs0">
   <input type="text" class="reviewsInput" placeholder="Class Name" id="className" required>
   <br>
@@ -116,7 +116,7 @@
   <br>
   <br>
   <div id="error"></div>
-  <button onclick="test()" class="submit">Edit</button>
+  <button onclick="test()" class="submit">Submit</button>
 </div>
 
 <button style="margin-top: -650px; margin-left: 400px" class="toggle" onclick="create()">Submit review</button>
@@ -133,14 +133,14 @@
 <script>
 
   function create() {
-    window.location.href = "./mymakecr.html";
+    window.location.href = "./mymakecr.html"
   }
 
   function update() {
-    window.location.href = "./mycrupdate.html";
+    window.location.href = "./mycrupdate.html"
   }
 
-  function remove() {
+    function remove() {
     window.location.href = "./mydeletecr.html";
   }
 
@@ -168,7 +168,7 @@
 
       // URL for Create API
       // Fetch API call to the database to create a new user
-      fetch("https://seal.nighthawkcodingsociety.com/api/users/updateclassreview", requestOptions)
+      fetch("https://seal.nighthawkcodingsociety.com/api/users/createclassreview", requestOptions)
         .then(response => {
           // trap error response from Web API
           if (response.status !== 200) {
