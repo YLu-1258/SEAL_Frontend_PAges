@@ -32,7 +32,7 @@
       }
       
       .main {
-    
+        margin-top: 50px;
         place-self: center !important;
         background-color: rgba(255, 196, 0, 0.75);
         padding-left: 50px;
@@ -46,8 +46,43 @@
         border: 1px solid black;
         }
 
+      .search {
+        margin-left: 700px;
+        background-color: rgba(255, 244, 93, 0.75) !important;
+        padding-left: 2em;
+        padding-right: 2em;
+        padding-top: 1em;
+        padding-bottom: 1em;
+        width: 400px;
+        border-radius: 20px;
+      }
+
+      .submit{
+        padding-left: 5em;
+        padding-right: 5em;
+        padding-top: 1em;
+        padding-bottom: 1em;
+        margin-top: 30px;
+        margin-left: 840px;
+        left: 30%;
+        background-color: rgba(255, 196, 0, 0.75) !important;
+        border: none;
+        border-radius:20px;
+        color: rgb(83,83,83);
+        font-weight: bold;
+        width: 175px;
+  }
+
 
 </style>
+
+<h1 style="margin-top: 130px; margin-left: 800px">Search for a class</h1>
+
+<input type="text" class="search" placeholder="Class Name" id="className" required>
+<button onclick="searchButton()" class="submit">Search</button>
+
+<div id="classNotFound" style="margin-left: 650px"></div>
+
 <div id="getReview" class="main">
     <table class="tablelines">
         <tr>
@@ -67,107 +102,144 @@
 
 
 <script>
-    fetch("https://seal.nighthawkcodingsociety.com/api/users/classreview")
+  function searchButton() {
+    document.getElementById("classNotFound").innerHTML = "";
+    document.getElementById("reviews").innerHTML = ""; 
+
+    var classInput = document.getElementById("className").value;
+
+    findClass(classInput); 
+  }
+
+
+  function findClass(classInput) {
+    var dnClasses = ["AP Calculus AB", "AP Biology"];
+    var classFound = false; 
+
+    for (let i = 0; i < dnClasses.length; i++) {
+      if (classInput == dnClasses[i]) {
+        classFound = true; 
+      }
+    }
+
+    if (!classFound) {
+      var p = document.createElement("p"); 
+      var msg = document.createTextNode("Class not found. Please ensure that the class name was typed correctly."); 
+      p.appendChild(msg);
+      document.getElementById("classNotFound").appendChild(p); 
+    } else {
+      getClassData(classInput); 
+    }
+
+  }
+
+function getClassData(classInput) {
+  fetch("https://seal.nighthawkcodingsociety.com/api/users/classreview")
           .then(response => {
             // trap error response from Web API
             response.json().then(data => {
                 console.log(data);
 
                 for (const row of data) {
+                    if (classInput == row.className) {
                     // make "tr element" for each "row of data"
-                    const tr = document.createElement("tr");
-                    
-                    // td for joke cell
-                    const className = document.createElement("td");
-                    className.innerHTML = row.className;  // add fetched data to innerHTML
-        
-                    // td for haha cell with onclick actions
-                    const daysBtwTest= document.createElement("td");
-                    daysBtwTest.innerHTML = row.daysBtwTest; 
-        
-                    // td for boohoo cell with onclick actions
-                    const difficulty= document.createElement("td");
-                    difficulty.innerHTML = row.difficulty; 
+                      const tr = document.createElement("tr");
+                      
+                      // td for joke cell
+                      const className = document.createElement("td");
+                      className.innerHTML = row.className;  // add fetched data to innerHTML
+          
+                      // td for haha cell with onclick actions
+                      const daysBtwTest= document.createElement("td");
+                      daysBtwTest.innerHTML = row.daysBtwTest; 
+          
+                      // td for boohoo cell with onclick actions
+                      const difficulty= document.createElement("td");
+                      difficulty.innerHTML = row.difficulty; 
 
-                    const hoursOfHw= document.createElement("td");
-                    hoursOfHw.innerHTML = row.hoursOfHw; 
+                      const hoursOfHw= document.createElement("td");
+                      hoursOfHw.innerHTML = row.hoursOfHw; 
 
-                    const memorizationLevel = document.createElement("td");
-                    memorizationLevel.innerHTML = row.memorizationLevel; 
+                      const memorizationLevel = document.createElement("td");
+                      memorizationLevel.innerHTML = row.memorizationLevel; 
 
-                    const comments = document.createElement("td");
-                    comments.innerHTML = row.comments; 
-                     
-                    // this builds ALL td's (cells) into tr (row) element
-                    tr.appendChild(className);
-                    tr.appendChild(daysBtwTest);
-                    tr.appendChild(difficulty);
-                    tr.appendChild(hoursOfHw);
-                    tr.appendChild(memorizationLevel);
-                    tr.appendChild(comments);
-        
-                    // this adds all the tr (row) work above to the HTML "result" container
-                    document.getElementById("reviews").appendChild(tr);
+                      const comments = document.createElement("td");
+                      comments.innerHTML = row.comments; 
+                      
+                      // this builds ALL td's (cells) into tr (row) element
+                      tr.appendChild(className);
+                      tr.appendChild(daysBtwTest);
+                      tr.appendChild(difficulty);
+                      tr.appendChild(hoursOfHw);
+                      tr.appendChild(memorizationLevel);
+                      tr.appendChild(comments);
+          
+                      // this adds all the tr (row) work above to the HTML "result" container
+                      document.getElementById("reviews").appendChild(tr);
+                    }
+
+
+
+                  
+                  var p = document.createElement("p");
+                  let br = document.createElement("br");
+
+                  
+                  console.log(data[0].className);
+
+                  /*
+                  p.appendChild(document.createTextNode("Class Name: " + data[0].className)); 
+                  document.getElementById("getReview").appendChild(p);
+                  document.getElementById("getReview").appendChild(br);
+                  p = document.createElement("p");
+                  p.appendChild(document.createTextNode("Class Name: " + data[0].className)); 
+                  document.getElementById("getReview").appendChild(p);
+                  */
+
+                  /*
+                  for (let i = 0; i < data.length; i++) {
+                  
+                      p = document.createElement("p");
+                      p.appendChild(document.createTextNode("Class Name: " + data[i].className)); 
+                      document.getElementById("getReview").appendChild(p);
+
+                      p = document.createElement("p");
+                      p.appendChild(document.createTextNode("Comments: " + data[i].comments)); 
+                      document.getElementById("getReview").appendChild(p);
+
+                      p = document.createElement("p");
+                      p.appendChild(document.createTextNode("Days Between Tests: " + data[i].daysBtwTest)); 
+                      document.getElementById("getReview").appendChild(p);
+
+                      p = document.createElement("p");
+                      p.appendChild(document.createTextNode("Difficulty: " + data[i].difficulty)); 
+                      document.getElementById("getReview").appendChild(p);
+
+                      p = document.createElement("p");
+                      p.appendChild(document.createTextNode("Hours of homework: " + data[i].hoursOfHw)); 
+                      document.getElementById("getReview").appendChild(p);
+
+                      p = document.createElement("p");
+                      p.appendChild(document.createTextNode("Memorization Level: " + data[i].memorizationLevel)); 
+                      document.getElementById("getReview").appendChild(p);
+
+                      p = document.createElement("p");
+                      p.appendChild(document.createTextNode("User id: " + data[i].user_id)); 
+                      document.getElementById("getReview").appendChild(p);
+
+
+
+              
+
                   }
-
-
-
-                
-                var p = document.createElement("p");
-                let br = document.createElement("br");
-
-                
-                console.log(data[0].className);
-
-                /*
-                p.appendChild(document.createTextNode("Class Name: " + data[0].className)); 
-                document.getElementById("getReview").appendChild(p);
-                document.getElementById("getReview").appendChild(br);
-                p = document.createElement("p");
-                p.appendChild(document.createTextNode("Class Name: " + data[0].className)); 
-                document.getElementById("getReview").appendChild(p);
-                */
-
-                /*
-                for (let i = 0; i < data.length; i++) {
-                
-                    p = document.createElement("p");
-                    p.appendChild(document.createTextNode("Class Name: " + data[i].className)); 
-                    document.getElementById("getReview").appendChild(p);
-
-                    p = document.createElement("p");
-                    p.appendChild(document.createTextNode("Comments: " + data[i].comments)); 
-                    document.getElementById("getReview").appendChild(p);
-
-                    p = document.createElement("p");
-                    p.appendChild(document.createTextNode("Days Between Tests: " + data[i].daysBtwTest)); 
-                    document.getElementById("getReview").appendChild(p);
-
-                    p = document.createElement("p");
-                    p.appendChild(document.createTextNode("Difficulty: " + data[i].difficulty)); 
-                    document.getElementById("getReview").appendChild(p);
-
-                    p = document.createElement("p");
-                    p.appendChild(document.createTextNode("Hours of homework: " + data[i].hoursOfHw)); 
-                    document.getElementById("getReview").appendChild(p);
-
-                    p = document.createElement("p");
-                    p.appendChild(document.createTextNode("Memorization Level: " + data[i].memorizationLevel)); 
-                    document.getElementById("getReview").appendChild(p);
-
-                    p = document.createElement("p");
-                    p.appendChild(document.createTextNode("User id: " + data[i].user_id)); 
-                    document.getElementById("getReview").appendChild(p);
-
-
-
-            
-
-                }
-                */
+                  */
+                    }
+                   
                 
             })
             }
             // response contains valid result
         )
+}
+   
 </script>
