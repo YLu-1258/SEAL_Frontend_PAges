@@ -4,63 +4,95 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./assets/myday.css">
-    <title>My Day</title>
+    <title>Document</title>
     <script>
+        let masterSleepHours = "";
+        let masterSleepMinutes = "";
+
+    function SomeDeleteRowFunction() {
+        // event.target will be the input element.
+        var td = event.target.parentNode; 
+        var tr = td.parentNode; // the row to be removed
+        tr.parentNode.removeChild(tr);
+        update_time();
+    }
+
+    function update_time() {
+        var today = new Date();
+        var hours = today.getHours();
+        var minutes = today.getMinutes();
+        var taskTimes = document.getElementsByClassName("time");
+        var totaltime = 0;
+        for (let i = 0; i < taskTimes.length; i++) {
+            totaltime = parseInt(totaltime) + parseInt(taskTimes[i].innerHTML);
+        }
+        console.log(totaltime);
+
+        var taskMinutes = parseInt(totaltime) % 60;
+        var taskHours = parseInt(totaltime) - parseInt(taskMinutes);
+        taskHours = parseInt(taskHours) / 60;
+
+        var sleepHours = parseInt(taskHours) + hours;
+        var sleepMinutes = parseInt(taskMinutes) + minutes;
+
+        if (parseInt(sleepMinutes) >= 60) {
+            sleepMinutes = parseInt(sleepMinutes) - 60;
+            sleepHours = parseInt(sleepHours) + 1;
+        }
+        console.log("Unformatted completed time: " + String(sleepHours) + ":" + String(sleepMinutes));
+
+        // AM or PM
+        var am = true;
+        if (parseInt(sleepHours) % 24 >= 12) {
+            am = false;
+        }
+        if (parseInt(sleepHours) > 12) {
+            while (parseInt(sleepHours) > 12) {
+                sleepHours = parseInt(sleepHours) - 12;
+            }
+        }
+
+        // if minutes < 10
+        if (parseInt(sleepMinutes) < 10) {
+            sleepMinutes = "0" + String(sleepMinutes);
+        }
+
+
+        // final formatting
+        if (am) {
+            var SleepTime = String(sleepHours) + ":" + String(sleepMinutes) + " AM";
+        }
+        else {
+            var SleepTime = String(sleepHours) + ":" + String(sleepMinutes) + " PM";
+        }
+
+
+        document.getElementById("sleepTime").innerHTML = "Estimated Sleep Time: " + SleepTime;
+        
+    }
+
+    setInterval(function () {
+        update_time();
+    }, 60000);
+
 
         function push() {
+            // no task name
             if(document.querySelector('#newtask input').value.length == 0){
             alert("Kindly Enter Task Name!!!!")
             }
+            else {
+                var updateMinutes = document.getElementById("tasktimes").value;
+                document.querySelector('#tasks').innerHTML += `<tr><td>${document.getElementById("tasknames").value}</td><td class="time">${document.getElementById("tasktimes").value}</td><td><input type="button" value="Delete Task" onclick="SomeDeleteRowFunction()"></td></tr>`;
 
-            else{
-                document.querySelector('#tasks').innerHTML += `
-                    <div class="task">
-                        <span id="taskname">
-                            ${document.getElementById("tasknames").value}
-                        </span>
-                        <span id="tasktime">
-                            ${document.getElementById("tasktimes").value}
-                        </span>
-                        <button class="delete">
-                            <i class="far fa-trash-alt"></i>
-                        </button>
-                    </div>
-                `;
-
-                var current_tasks = document.querySelectorAll(".delete");
-                for(var i=0; i<current_tasks.length; i++){
-                    current_tasks[i].onclick = function(){
-                        this.parentNode.remove();
-                    }
-                }
             }
+            update_time();
+            document.getElementById('tasknames').value = '';
+            document.getElementById('tasktimes').value = '';
 
         }
+        
 
-        function push2(name, time) {
-
-                document.querySelector('#tasks').innerHTML = document.querySelector('#tasks').innerHTML + `
-                    <div class="task">
-                        <span id="taskname">` + 
-                            name + `
-                        </span>
-                        <span id="tasktime">` + 
-                            time + `
-                        </span>
-                        <button class="delete">
-                            <i class="far fa-trash-alt"></i>
-                        </button>
-                    </div>
-                `;
-
-                var current_tasks = document.querySelectorAll(".delete");
-                for(var i=0; i<current_tasks.length; i++){
-                    current_tasks[i].onclick = function(){
-                        this.parentNode.remove();
-                    }
-                }
-        }
         function getCookie(cname) {
         let name = cname + "=";
         let decodedCookie = decodeURIComponent(document.cookie);
@@ -76,10 +108,12 @@
         }
         return "";
       }
-        function update_display() {
+    
+
+      function update_display() {
         // prepare fetch options
         let id = getCookie("id")
-        console.log(id)
+        console.log(id);
         const read_options = {
           method: 'GET', // *GET, POST, PUT, DELETE, etc.
           mode: 'cors', // no-cors, *cors, same-origin
@@ -103,32 +137,47 @@
             // valid response will have json data
             response.json().then(data => {
                 for (let i = 0; i<data.length; i++) {
+                    var totaltime = 0;
                     if (i == id) {
                         for (let j=0; j<data[i]["tasks"].length; j++) {
+                            totaltime = totaltime + parseInt(data[i]["times"][j]);
                             console.log(data[i]["tasks"][j] + " takes " + data[i]["times"][j] + " minutes")
-                            push2(data[i]["tasks"][j], data[i]["times"][j])
-                    }
+                            var name = data[i]["tasks"][j];
+                            var time = data[i]["times"][j];
+                            document.querySelector('#tasks').innerHTML += `<tr><td>`+name+`</td><td class="time">`+time+`</td><td><input type="button" value="Delete Task" onclick="SomeDeleteRowFunction()"></td></tr>`;    
+                            update_time();
+                        }
+
                     }
                 }
             })
         })
+
         // catch fetch errors (ie ACCESS to server blocked)
         .catch(err => {
           console.error(err);
         });
       }
-      update_display()
+
+
+      update_display();
+
     </script>
-    <script src="./assets/js/calculateSleepTime.js"></script>
+
 </head>
 <body>
-    <div class="container">
-        <div id="newtask">
-            <input id="tasknames" type="text" placeholder="Add Tasks">
-            <input id="tasktimes" type="number" placeholder="Estimated Time">
-            <button id="push" onclick="push();">Add</button>
-        </div>
-        <div id="tasks"></div>
+    <div id="newtask">
+        <input id="tasknames" type="text" onfocus="this.value=''" placeholder="Task Name">
+        <input id="tasktimes" type="number" onfocus="this.value=''" placeholder="Task time in minutes">
+        <button id="push" onclick="push();">Add Task</button>
+        <table border="1px solid black" id="tasks">
+            <tr>
+              <th width="70%">Task name</th>
+              <th width="20%">Task time (minutes)</th>
+              <th width="10%">Delete</th>
+            </tr>
+          </table>
+        <h3 id="sleepTime">Estimated sleep time: </h3>
     </div>
 </body>
 </html>
