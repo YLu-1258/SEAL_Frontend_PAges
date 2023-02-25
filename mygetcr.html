@@ -113,11 +113,13 @@
 
 
   function findClass(classInput) {
-    var dnClasses = ["AP Calculus AB", "AP Biology", "AP US History", "AP Computer Science Principles"];
+    var dnClasses = ["AP Calculus AB", "AP Biology", "AP US History", "AP Computer Science Principles", "AP CSP", "APCSP"];
     var classFound = false; 
 
     for (let i = 0; i < dnClasses.length; i++) {
-      if (classInput == dnClasses[i]) {
+      console.log(classInput.toUpperCase());
+      console.log(dnClasses[i].toUpperCase());
+      if (classInput.toUpperCase() === dnClasses[i].toUpperCase()) {
         classFound = true; 
       }
     }
@@ -141,7 +143,7 @@ function getClassData(classInput) {
                 console.log(data);
 
                 for (const row of data) {
-                    if (classInput == row.className) {
+                    if (classInput.toUpperCase() == row.className.toUpperCase()) {
                     // make "tr element" for each "row of data"
                       const tr = document.createElement("tr");
                       
